@@ -73,9 +73,9 @@ const STEPS = [
 export default function ProcesoClinicoPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Proceso clínico
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -103,7 +103,7 @@ export default function ProcesoClinicoPage() {
                 {i < STEPS.length - 1 && (
                   <div className="absolute left-5 top-12 w-px h-full bg-gray-200" />
                 )}
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#2D6A4F] text-white font-bold text-sm flex items-center justify-center z-10">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#8b2fa0] text-white font-bold text-sm flex items-center justify-center z-10">
                   {step.order}
                 </div>
                 <div className="pt-1">
@@ -147,7 +147,7 @@ export default function ProcesoClinicoPage() {
           <div className="mt-12 pt-8 border-t border-gray-100">
             <Link
               href="/contacto"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Agenda tu cita
             </Link>

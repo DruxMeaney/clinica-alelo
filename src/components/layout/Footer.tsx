@@ -24,10 +24,10 @@ const footerNav = {
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="gradient-alelo-dark text-gray-300">
       {/* Vinculación científica */}
-      <div className="border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-12 text-center">
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 py-14 text-center">
           <p className="text-lg font-medium text-white mb-2">
             Vinculación científica e institucional
           </p>
@@ -37,7 +37,7 @@ export default function Footer() {
           </p>
           <Link
             href="/contacto"
-            className="inline-flex px-6 py-3 border border-[#52B788] text-[#52B788] text-sm font-medium rounded-lg hover:bg-[#52B788] hover:text-white transition-colors"
+            className="inline-flex px-6 py-3 border border-purple-400/40 text-purple-300 text-sm font-medium rounded-xl hover:bg-purple-500/10 hover:border-purple-400/60 transition-all"
           >
             Iniciar conversación
           </Link>
@@ -49,7 +49,7 @@ export default function Footer() {
         {/* Marca */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-md bg-[#2D6A4F] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg gradient-alelo flex items-center justify-center">
               <span className="text-white font-bold text-sm">A</span>
             </div>
             <span className="text-white font-semibold">Clínica Alelo</span>
@@ -58,10 +58,6 @@ export default function Footer() {
             Medicina genómica preventiva para la población mexicana.
             Investigación, atención clínica y generación de conocimiento.
           </p>
-          {/* Redes — POR CONFIGURAR */}
-          <div className="flex gap-4 mt-6">
-            <span className="text-xs text-gray-500">[Redes sociales — por definir]</span>
-          </div>
         </div>
 
         {/* Clínica */}
@@ -70,7 +66,7 @@ export default function Footer() {
           <ul className="space-y-2">
             {footerNav.clinica.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
+                <Link href={item.href} className="text-sm text-gray-400 hover:text-purple-300 transition-colors">
                   {item.label}
                 </Link>
               </li>
@@ -84,7 +80,7 @@ export default function Footer() {
           <ul className="space-y-2">
             {footerNav.ciencia.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
+                <Link href={item.href} className="text-sm text-gray-400 hover:text-purple-300 transition-colors">
                   {item.label}
                 </Link>
               </li>
@@ -92,52 +88,40 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Legal */}
+        {/* Legal + Bases de datos */}
         <div>
           <h4 className="text-white text-sm font-semibold mb-4">Legal y ética</h4>
           <ul className="space-y-2">
             {footerNav.legal.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
+                <Link href={item.href} className="text-sm text-gray-400 hover:text-purple-300 transition-colors">
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
 
-          {/* Bases de datos */}
           <h4 className="text-white text-sm font-semibold mt-8 mb-4">Bases de datos</h4>
           <ul className="space-y-2">
-            <li>
-              <a href="https://www.ncbi.nlm.nih.gov/snp/" target="_blank" rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
-                dbSNP (NCBI) &rarr;
-              </a>
-            </li>
-            <li>
-              <a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank" rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
-                ClinVar (NCBI) &rarr;
-              </a>
-            </li>
-            <li>
-              <a href="https://gnomad.broadinstitute.org/" target="_blank" rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
-                gnomAD &rarr;
-              </a>
-            </li>
-            <li>
-              <a href="https://www.pharmgkb.org/" target="_blank" rel="noopener noreferrer"
-                className="text-sm text-gray-400 hover:text-[#52B788] transition-colors">
-                PharmGKB &rarr;
-              </a>
-            </li>
+            {[
+              { label: "dbSNP (NCBI)", href: "https://www.ncbi.nlm.nih.gov/snp/" },
+              { label: "ClinVar (NCBI)", href: "https://www.ncbi.nlm.nih.gov/clinvar/" },
+              { label: "gnomAD", href: "https://gnomad.broadinstitute.org/" },
+              { label: "PharmGKB", href: "https://www.pharmgkb.org/" },
+            ].map((db) => (
+              <li key={db.label}>
+                <a href={db.href} target="_blank" rel="noopener noreferrer"
+                  className="text-sm text-gray-400 hover:text-purple-300 transition-colors">
+                  {db.label} &rarr;
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-800">
+      <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-gray-500">
             &copy; {new Date().getFullYear()} Clínica Alelo. Todos los derechos reservados.

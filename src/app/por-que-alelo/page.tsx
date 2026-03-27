@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function PorQueAleloPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">Contexto</p>
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">Contexto</p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
             Por qué existe Clínica Alelo
           </h1>
@@ -85,7 +85,7 @@ export default function PorQueAleloPage() {
           </div>
 
           {/* Nuestra respuesta */}
-          <div className="p-8 rounded-2xl bg-[#2D6A4F]/5 border border-[#2D6A4F]/10">
+          <div className="p-8 rounded-2xl bg-purple-50/50 border border-purple-200/50">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               La respuesta de Clínica Alelo
             </h2>
@@ -105,7 +105,7 @@ export default function PorQueAleloPage() {
           <div className="pt-8 border-t border-gray-100">
             <Link
               href="/indice-alelo"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Conoce el Índice Alelo
             </Link>

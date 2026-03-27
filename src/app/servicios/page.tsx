@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function ServiciosPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">Servicios</p>
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">Servicios</p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
             Servicios clínicos y genómicos
           </h1>
@@ -185,13 +185,13 @@ export default function ServiciosPage() {
           <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
             <Link
               href="/contacto"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Agenda una consulta
             </Link>
             <Link
               href="/indice-alelo"
-              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#2D6A4F] hover:text-[#2D6A4F] transition-colors"
+              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#8b2fa0] hover:text-[#8b2fa0] transition-colors"
             >
               Conoce el Índice Alelo
             </Link>

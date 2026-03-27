@@ -1,8 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #0f0a1a;
+
+  /* Paleta Alelo — Fucsia a Lila */
+  --alelo-900: #2d0a3e;
+  --alelo-800: #4a1259;
+  --alelo-700: #6b1d7b;
+  --alelo-600: #8b2fa0;
+  --alelo-500: #a855c7;
+  --alelo-400: #c47ee0;
+  --alelo-300: #d9a6f0;
+  --alelo-200: #ead5f7;
+  --alelo-100: #f5ecfc;
+  --alelo-50: #faf5fe;
+
+  /* Acentos complementarios */
+  --accent-cyan: #06b6d4;
+  --accent-electric: #7c3aed;
+  --accent-rose: #e11d73;
+  --accent-gold: #f59e0b;
 }
 
 @theme inline {
@@ -12,15 +30,113 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
+
+/* ═══════════════════════════════════════════════════════
+   ANIMACIONES
+═══════════════════════════════════════════════════════ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; filter: blur(20px); }
+  50% { opacity: 0.7; filter: blur(30px); }
+}
+
+@keyframes helix-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes particle-drift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(30px, -20px) scale(1.2); opacity: 0.3; }
+  100% { transform: translate(-10px, 10px) scale(0.8); opacity: 0.6; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float 6s ease-in-out 2s infinite; }
+.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-helix { animation: helix-rotate 20s linear infinite; }
+.animate-dash { animation: dash-flow 2s linear infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+.animate-particle { animation: particle-drift 8s ease-in-out infinite; }
+
+/* ═══════════════════════════════════════════════════════
+   GRADIENTES ESPECIALES
+═══════════════════════════════════════════════════════ */
+
+.gradient-alelo {
+  background: linear-gradient(135deg, var(--alelo-700) 0%, var(--alelo-500) 50%, var(--accent-electric) 100%);
+}
+
+.gradient-alelo-soft {
+  background: linear-gradient(135deg, var(--alelo-50) 0%, #f0e6ff 50%, #fdf2f8 100%);
+}
+
+.gradient-alelo-dark {
+  background: linear-gradient(135deg, #0f0a1a 0%, var(--alelo-900) 50%, #1a0a2e 100%);
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(168, 85, 199, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(225, 29, 115, 0.08) 0%, transparent 50%);
+}
+
+.gradient-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   ELEMENTOS GENÉTICOS
+═══════════════════════════════════════════════════════ */
+
+.dna-border-left {
+  border-left: 2px solid transparent;
+  border-image: linear-gradient(to bottom, var(--alelo-500), var(--accent-electric), var(--alelo-300)) 1;
+}
+
+.glow-dot {
+  box-shadow: 0 0 8px var(--alelo-400), 0 0 20px rgba(168, 85, 199, 0.3);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(168, 85, 199, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Líneas de red molecular */
+.molecular-grid {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(168, 85, 199, 0.08) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Scrollbar sutil */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--alelo-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--alelo-400); }

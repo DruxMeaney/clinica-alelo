@@ -11,9 +11,9 @@ export default function NosotrosPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Nosotros
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -83,7 +83,7 @@ export default function NosotrosPage() {
                 </ul>
               </div>
               <div className="p-6 rounded-2xl border border-gray-100 bg-white">
-                <div className="w-10 h-1 rounded-full bg-[#2D6A4F] mb-4" />
+                <div className="w-10 h-1 rounded-full bg-[#8b2fa0] mb-4" />
                 <h3 className="text-base font-semibold text-gray-900 mb-3">
                   Centro de investigación en genética poblacional
                 </h3>
@@ -141,7 +141,7 @@ export default function NosotrosPage() {
           </div>
 
           {/* Recolección de datos */}
-          <div className="p-8 rounded-2xl bg-[#2D6A4F]/5 border border-[#2D6A4F]/10">
+          <div className="p-8 rounded-2xl bg-purple-50/50 border border-purple-200/50">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">
               Recolección de datos y estudios poblacionales
             </h3>
@@ -160,13 +160,13 @@ export default function NosotrosPage() {
           <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
             <Link
               href="/servicios"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Ver nuestros servicios
             </Link>
             <Link
               href="/por-que-alelo"
-              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#2D6A4F] hover:text-[#2D6A4F] transition-colors"
+              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#8b2fa0] hover:text-[#8b2fa0] transition-colors"
             >
               ¿Por qué existe Alelo?
             </Link>

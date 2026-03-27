@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 export default function ContactoPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Contacto
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -33,7 +33,7 @@ export default function ContactoPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none transition-colors"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#8b2fa0] focus:ring-1 focus:ring-[#8b2fa0] outline-none transition-colors"
                     placeholder="Tu nombre completo"
                   />
                 </div>
@@ -41,13 +41,13 @@ export default function ContactoPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none transition-colors"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#8b2fa0] focus:ring-1 focus:ring-[#8b2fa0] outline-none transition-colors"
                     placeholder="correo@ejemplo.com"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Perfil</label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none transition-colors text-gray-600">
+                  <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#8b2fa0] focus:ring-1 focus:ring-[#8b2fa0] outline-none transition-colors text-gray-600">
                     <option value="">Selecciona una opción</option>
                     <option value="paciente">Paciente potencial</option>
                     <option value="medico">Médico / profesional de la salud</option>
@@ -61,13 +61,13 @@ export default function ContactoPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
                   <textarea
                     rows={4}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#2D6A4F] focus:ring-1 focus:ring-[#2D6A4F] outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#8b2fa0] focus:ring-1 focus:ring-[#8b2fa0] outline-none transition-colors resize-none"
                     placeholder="¿En qué podemos ayudarte?"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+                  className="w-full px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
                 >
                   Enviar mensaje
                 </button>

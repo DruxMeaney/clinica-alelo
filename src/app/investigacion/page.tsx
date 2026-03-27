@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function InvestigacionPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Investigación
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -108,7 +108,7 @@ export default function InvestigacionPage() {
                 },
               ].map((phase) => (
                 <div key={phase.step} className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2D6A4F] text-white font-bold text-sm flex items-center justify-center">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#8b2fa0] text-white font-bold text-sm flex items-center justify-center">
                     {phase.step}
                   </div>
                   <div>
@@ -121,7 +121,7 @@ export default function InvestigacionPage() {
           </div>
 
           {/* Estudio piloto */}
-          <div className="p-8 rounded-2xl bg-[#2D6A4F]/5 border border-[#2D6A4F]/10">
+          <div className="p-8 rounded-2xl bg-purple-50/50 border border-purple-200/50">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Estudio piloto</h3>
             <p className="text-gray-600 leading-relaxed">
               El proyecto contempla un estudio piloto para validar su modelo de atención e
@@ -134,13 +134,13 @@ export default function InvestigacionPage() {
           <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
             <Link
               href="/contacto"
-              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#2D6A4F] hover:text-[#2D6A4F] transition-colors"
+              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#8b2fa0] hover:text-[#8b2fa0] transition-colors"
             >
               Vinculación institucional
             </Link>
             <Link
               href="/genomica-poblacional"
-              className="px-6 py-3 text-[#2D6A4F] font-medium hover:underline"
+              className="px-6 py-3 text-[#8b2fa0] font-medium hover:underline"
             >
               Genómica poblacional &rarr;
             </Link>

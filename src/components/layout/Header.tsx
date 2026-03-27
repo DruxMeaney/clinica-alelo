@@ -8,18 +8,18 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-purple-100/50">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#2D6A4F] flex items-center justify-center">
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 rounded-xl gradient-alelo flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-shadow">
             <span className="text-white font-bold text-lg">A</span>
           </div>
           <div>
             <span className="text-xl font-semibold text-gray-900 tracking-tight">
               Clínica Alelo
             </span>
-            <span className="hidden sm:block text-xs text-gray-500 -mt-0.5">
+            <span className="hidden sm:block text-xs text-purple-500/70 -mt-0.5">
               Medicina Genómica Preventiva
             </span>
           </div>
@@ -30,18 +30,18 @@ export default function Header() {
           {MAIN_NAV.map((item) =>
             item.children ? (
               <div key={item.label} className="relative group">
-                <button className="px-3 py-2 text-sm text-gray-700 hover:text-[#2D6A4F] transition-colors rounded-md">
+                <button className="px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0] transition-colors rounded-md">
                   {item.label}
                   <svg className="inline-block ml-1 w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-1 w-56 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl shadow-purple-500/10 border border-purple-100/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {item.children.map((child) => (
                     <Link
                       key={child.href}
                       href={child.href}
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D6A4F] first:rounded-t-lg last:rounded-b-lg"
+                      className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-purple-50 hover:text-[#8b2fa0] first:rounded-t-xl last:rounded-b-xl transition-colors"
                     >
                       {child.label}
                     </Link>
@@ -52,7 +52,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-3 py-2 text-sm text-gray-700 hover:text-[#2D6A4F] transition-colors rounded-md"
+                className="px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0] transition-colors rounded-md"
               >
                 {item.label}
               </Link>
@@ -64,7 +64,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           <Link
             href="/contacto"
-            className="hidden md:inline-flex px-5 py-2.5 bg-[#2D6A4F] text-white text-sm font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+            className="hidden md:inline-flex px-5 py-2.5 gradient-alelo text-white text-sm font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all"
           >
             Contacto
           </Link>
@@ -86,18 +86,18 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <nav className="lg:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-1">
+        <nav className="lg:hidden border-t border-purple-100/50 bg-white/95 backdrop-blur-xl px-6 py-4 space-y-1">
           {MAIN_NAV.map((item) =>
             item.children ? (
               <div key={item.label}>
-                <span className="block px-3 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <span className="block px-3 py-2 text-xs font-semibold text-purple-400 uppercase tracking-wider">
                   {item.label}
                 </span>
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
                     href={child.href}
-                    className="block px-6 py-2 text-sm text-gray-700 hover:text-[#2D6A4F]"
+                    className="block px-6 py-2 text-sm text-gray-600 hover:text-[#8b2fa0]"
                     onClick={() => setMobileOpen(false)}
                   >
                     {child.label}
@@ -108,7 +108,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="block px-3 py-2 text-sm text-gray-700 hover:text-[#2D6A4F]"
+                className="block px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0]"
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}

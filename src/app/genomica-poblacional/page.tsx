@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 export default function GenomicaPoblacionalPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Genómica poblacional
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -55,14 +55,14 @@ export default function GenomicaPoblacionalPage() {
                 <li>Cuando sucede en células germinales, puede transmitirse de generación en generación.</li>
               </ul>
             </div>
-            <div className="p-6 rounded-2xl border border-[#2D6A4F]/20 bg-[#2D6A4F]/5">
+            <div className="p-6 rounded-2xl border border-[#8b2fa0]/20 bg-purple-50/50">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Variación genética (polimorfismo)</h3>
               <ul className="text-sm text-gray-600 space-y-2">
                 <li>Cambios en el ADN presentes en un porcentaje significativo de la población (generalmente superior al 1%).</li>
                 <li>No necesariamente causan enfermedades por sí mismas, pero pueden modificar la propensión a ciertas condiciones.</li>
                 <li>Determinan la respuesta a fármacos, nutrientes y ejercicio.</li>
               </ul>
-              <p className="text-xs text-[#2D6A4F] mt-3 font-medium">
+              <p className="text-xs text-[#8b2fa0] mt-3 font-medium">
                 En Clínica Alelo, el foco se centra en las variantes polimórficas con relevancia clínica reconocida.
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function GenomicaPoblacionalPage() {
             </h2>
             <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2D6A4F]/10 text-[#2D6A4F] font-bold text-sm flex items-center justify-center">1</div>
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-[#8b2fa0] font-bold text-sm flex items-center justify-center">1</div>
                 <p className="text-sm text-gray-600">
                   <strong>Patrones poblacionales de riesgo:</strong> Entender la frecuencia y
                   distribución de los SNVs en diferentes regiones de México y su relación con
@@ -102,7 +102,7 @@ export default function GenomicaPoblacionalPage() {
                 </p>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2D6A4F]/10 text-[#2D6A4F] font-bold text-sm flex items-center justify-center">2</div>
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-[#8b2fa0] font-bold text-sm flex items-center justify-center">2</div>
                 <p className="text-sm text-gray-600">
                   <strong>Comparación de frecuencias alélicas:</strong> Identificar diferencias
                   significativas entre grupos étnicos, regiones geográficas o cohortes con distintos
@@ -110,7 +110,7 @@ export default function GenomicaPoblacionalPage() {
                 </p>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#2D6A4F]/10 text-[#2D6A4F] font-bold text-sm flex items-center justify-center">3</div>
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-[#8b2fa0] font-bold text-sm flex items-center justify-center">3</div>
                 <p className="text-sm text-gray-600">
                   <strong>Medicina de precisión:</strong> Los hallazgos contribuyen a diseñar
                   estrategias preventivas y de intervención cada vez más individualizadas, mejorando
@@ -158,7 +158,7 @@ export default function GenomicaPoblacionalPage() {
           <div className="pt-8 border-t border-gray-100">
             <Link
               href="/tecnologia"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Conoce nuestra tecnología
             </Link>

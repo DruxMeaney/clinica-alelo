@@ -61,9 +61,9 @@ const DISCIPLINES = [
 export default function EquipoPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-emerald-50/30 py-20">
+      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
         <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#2D6A4F] tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Equipo
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
@@ -98,12 +98,12 @@ export default function EquipoPage() {
                   key={d.role}
                   className="p-6 rounded-2xl border border-gray-100 bg-white hover:shadow-md transition-shadow"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-[#2D6A4F]/10 flex items-center justify-center mb-4">
-                    <div className="w-4 h-4 rounded-full bg-[#2D6A4F]" />
+                  <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
+                    <div className="w-4 h-4 rounded-full bg-[#8b2fa0]" />
                   </div>
                   <h3 className="text-base font-semibold text-gray-900 mb-2">{d.role}</h3>
                   <p className="text-sm text-gray-600 leading-relaxed mb-3">{d.desc}</p>
-                  <p className="text-xs text-[#2D6A4F] font-medium">{d.focus}</p>
+                  <p className="text-xs text-[#8b2fa0] font-medium">{d.focus}</p>
                 </div>
               ))}
             </div>
@@ -131,7 +131,7 @@ export default function EquipoPage() {
           <div className="pt-8 border-t border-gray-100">
             <Link
               href="/contacto"
-              className="px-6 py-3 bg-[#2D6A4F] text-white font-medium rounded-lg hover:bg-[#245A42] transition-colors"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
             >
               Contáctanos
             </Link>
