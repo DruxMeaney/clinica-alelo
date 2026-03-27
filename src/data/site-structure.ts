@@ -72,7 +72,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Captar la atención, transmitir la propuesta de valor y posicionar a Alelo como proyecto pionero.",
     keyMessage:
       "Alelo conecta investigación genómica, prevención clínica y ciencia de datos biológicos para la población mexicana.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Animación sutil de secuencias genéticas / red molecular con paleta institucional. Fotografía clínica no estereotipada.",
     cta: { label: "Conoce nuestro enfoque", href: "/nosotros", variant: "primary" },
@@ -88,7 +88,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Explicar la naturaleza de la clínica: clínica + investigación + prevención + contexto mexicano.",
     keyMessage:
       "Alelo cierra la brecha entre la investigación genómica y la práctica clínica en México.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Diagrama de intersección: clínica – genómica – investigación – prevención. Fotografía del espacio o del equipo.",
     cta: { label: "Ver nuestros servicios", href: "/servicios", variant: "primary" },
@@ -104,7 +104,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Contextualizar la carga cardiometabólica en México y la necesidad de herramientas genómicas contextualizadas.",
     keyMessage:
       "México necesita herramientas clínicas más precisas, preventivas y contextualizadas para su diversidad genética.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Datos epidemiológicos visualizados. Mapa de México con capas de diversidad genética.",
     cta: { label: "Conoce el Índice Alelo", href: "/indice-alelo", variant: "primary" },
@@ -120,7 +120,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Presentar los tres ejes iniciales: riesgo cardiometabólico, nutrigenómica, respuesta al ejercicio.",
     keyMessage:
       "Traducimos información genética en estrategias preventivas individualizadas y realistas.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Tres tarjetas/módulos con íconos: corazón/metabolismo, nutrición, ejercicio.",
     cta: { label: "Agenda una consulta", href: "/contacto", variant: "primary" },
@@ -136,7 +136,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Explicar el sistema de integración genómica: 7 módulos, escala 0-100, variantes de riesgo y protectoras.",
     keyMessage:
       "El Índice Alelo convierte la complejidad genómica en información clínicamente útil.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Visualización interactiva de 7 módulos. Gráficos de barras o radiales. Ejemplo visual de un perfil.",
     cta: { label: "Ver los siete módulos", href: "/indice-alelo#modulos", variant: "primary" },
@@ -152,7 +152,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Mostrar la dimensión de investigación: bases de datos, prevalencia, publicaciones, vinculación.",
     keyMessage:
       "Alelo genera conocimiento poblacional y contribuye a la medicina de precisión en México.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Línea de tiempo de investigación. Logos de alianzas. Gráficas de datos poblacionales.",
     cta: { label: "Vinculación institucional", href: "/contacto", variant: "secondary" },
@@ -168,7 +168,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Explicar SNVs, frecuencias alélicas, diversidad poblacional mexicana y pertinencia clínica.",
     keyMessage:
       "La genómica sin contexto poblacional puede ser insuficiente o engañosa.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Diagrama de frecuencias alélicas comparadas. Mapa de ancestrías. Esquema de ADN con variantes señaladas.",
     cta: { label: "Conoce nuestra tecnología", href: "/tecnologia", variant: "secondary" },
@@ -184,7 +184,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Presentar la plataforma tecnológica: Oxford Nanopore, bioinformática, curación de evidencia.",
     keyMessage:
       "Infraestructura científica sólida para generar resultados confiables y trazables.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Flujo tecnológico: muestra → secuenciación → análisis → interpretación. Fotografía de equipos.",
     cta: { label: "Ver el proceso clínico", href: "/proceso-clinico", variant: "secondary" },
@@ -200,7 +200,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Presentar con sobriedad la línea futura de análisis de ancestría.",
     keyMessage:
       "Metodologías de pertinencia científica, no entretenimiento genealógico superficial.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Diagrama de haplogrupos. Mapa de migraciones ancestrales. Línea discreta, no prominente.",
     cta: { label: "Más sobre nuestra ciencia", href: "/investigacion", variant: "outline" },
@@ -216,7 +216,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Mostrar el flujo clínico completo: recepción, consentimiento, muestra, análisis, resultados, seguimiento.",
     keyMessage:
       "Un proceso ordenado, ético y centrado en el paciente.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Línea de tiempo horizontal o vertical con pasos numerados e íconos.",
     cta: { label: "Agenda tu cita", href: "/contacto", variant: "primary" },
@@ -232,7 +232,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Comunicar compromisos éticos: consentimiento, confidencialidad, regulación mexicana, trazabilidad.",
     keyMessage:
       "La confianza se construye con transparencia, rigor y responsabilidad.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Íconos de escudo, candado, documento. Diseño sobrio y confiable.",
     cta: { label: "Conoce nuestro equipo", href: "/equipo", variant: "outline" },
@@ -248,7 +248,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Mostrar las disciplinas involucradas y la naturaleza interdisciplinaria.",
     keyMessage:
       "La interpretación genómica no recae en una sola disciplina.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Tarjetas de equipo con disciplina, rol y fotografía. Red de conexiones entre disciplinas.",
     cta: { label: "Contáctanos", href: "/contacto", variant: "primary" },
@@ -264,7 +264,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Resolver dudas comunes con rigor y claridad.",
     keyMessage:
       "La genómica es compleja, pero sus beneficios deben ser comprensibles.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement: "Acordeón expandible, agrupado por categorías.",
     cta: { label: "¿Más preguntas? Escríbenos", href: "/contacto", variant: "secondary" },
   },
@@ -279,7 +279,7 @@ export const SITE_SECTIONS: SiteSection[] = [
       "Facilitar agendamiento, consultas, alianzas y vinculación institucional.",
     keyMessage:
       "Alelo está abierto a la colaboración, la referencia clínica y la investigación conjunta.",
-    contentStatus: "esqueleto",
+    contentStatus: "borrador",
     visualElement:
       "Formulario limpio. Datos de contacto. Mapa. Secciones diferenciadas por tipo de interlocutor.",
     cta: { label: "Enviar mensaje", href: "#form", variant: "primary" },

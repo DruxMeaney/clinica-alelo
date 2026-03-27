@@ -28,24 +28,74 @@ export default function IndiceAleloPage() {
       {/* Qué es */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6 space-y-8">
-          <div className="p-8 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50">
-            <h2 className="text-xl font-semibold text-gray-700 mb-3">¿Qué es el Índice Alelo?</h2>
-            <p className="text-gray-400">Un sistema de integración genómica diseñado para convertir la información de múltiples variantes de un solo nucleótido (SNV) en puntajes modulares interpretables. Organiza la información genética en siete módulos temáticos y expresa la carga relativa de riesgo o protección en una escala porcentual de 0 a 100.</p>
+          <div className="p-8 rounded-2xl border border-gray-100 bg-white">
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">¿Qué es el Índice Alelo?</h2>
+            <p className="text-gray-600 leading-relaxed">
+              Un sistema de integración genómica diseñado para convertir la información de múltiples
+              variantes de un solo nucleótido (SNV) en puntajes modulares interpretables. Organiza
+              la información genética en siete módulos temáticos y expresa la carga relativa de
+              riesgo o protección en una escala porcentual de 0 a 100, permitiendo una lectura
+              clínica más clara, visual e intuitiva.
+            </p>
           </div>
 
-          <div className="p-8 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50">
-            <h2 className="text-xl font-semibold text-gray-700 mb-3">¿Por qué se creó?</h2>
-            <p className="text-gray-400">POR LLENAR — Problema que resuelve: la complejidad de interpretar múltiples variantes de manera aislada. La necesidad de una lectura clínica integrada, visual e intuitiva.</p>
+          <div className="p-8 rounded-2xl border border-gray-100 bg-white">
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">¿Por qué se creó?</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              La secuenciación genómica puede arrojar información sobre decenas o cientos de
+              variantes en un solo individuo. Interpretar estas variantes de manera aislada
+              resulta poco práctico tanto para el clínico como para el paciente. El Índice Alelo
+              nace para resolver este problema: integrar múltiples variantes en módulos temáticos
+              coherentes que traduzcan la complejidad genómica en información accionable.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              En lugar de presentar un listado extenso de genotipos, el Índice agrupa las variantes
+              por su relevancia biológica y clínica, las pondera según la evidencia disponible y
+              genera una estimación neta que orienta las decisiones de prevención, seguimiento e
+              intervención personalizada.
+            </p>
           </div>
 
-          <div className="p-8 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50">
-            <h2 className="text-xl font-semibold text-gray-700 mb-3">¿Cómo se leen los puntajes?</h2>
-            <p className="text-gray-400">POR LLENAR — Escala 0-100, significado de los rangos, diferenciación entre variantes de riesgo y protectoras, estimación neta. El resultado no es un destino biológico sino una herramienta de interpretación clínica y preventiva.</p>
+          <div className="p-8 rounded-2xl border border-gray-100 bg-white">
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">¿Cómo se leen los puntajes?</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Cada módulo expresa su resultado en una escala de 0 a 100. En los módulos de riesgo
+              (como salud cardiovascular o diabetes tipo 2), un puntaje más alto indica mayor carga
+              genética asociada a ese eje. En módulos orientativos (como rendimiento deportivo o
+              farmacogenética), el puntaje no indica riesgo sino perfil o tendencia.
+            </p>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Dentro de cada módulo pueden coexistir variantes de riesgo y variantes protectoras.
+              Ambas se interpretan de manera diferenciada: las variantes de riesgo suman carga
+              al módulo, mientras que las protectoras la atenúan. La estimación final es una
+              estimación neta que refleja el balance entre ambas.
+            </p>
+            <p className="text-gray-600 leading-relaxed font-medium">
+              El resultado no debe entenderse como destino biológico, sino como una herramienta
+              de interpretación clínica y preventiva que siempre debe complementarse con historia
+              clínica, estudios de laboratorio y evaluación del estilo de vida.
+            </p>
           </div>
 
-          <div className="p-8 rounded-2xl border-2 border-dashed border-gray-200 bg-gray-50/50">
-            <h2 className="text-xl font-semibold text-gray-700 mb-3">Peso clínico de cada variante</h2>
-            <p className="text-gray-400">Cada SNV recibe un peso clínico según la magnitud del efecto, la robustez de la evidencia y el grado de acción clínica posible. Las variantes se seleccionan por evidencia científica, relevancia clínica y pertinencia poblacional.</p>
+          <div className="p-8 rounded-2xl border border-gray-100 bg-white">
+            <h2 className="text-xl font-semibold text-gray-900 mb-3">Peso clínico de cada variante</h2>
+            <p className="text-gray-600 leading-relaxed mb-4">
+              Cada SNV incluida en el Índice recibe un peso clínico determinado por tres criterios:
+            </p>
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div className="p-4 rounded-xl bg-gray-50">
+                <h4 className="text-sm font-semibold text-gray-900 mb-1">Magnitud del efecto</h4>
+                <p className="text-xs text-gray-600">El tamaño del efecto reportado en estudios de asociación (odds ratios, hazard ratios) y su significancia estadística (p &lt; 0.05, n ≥ 100).</p>
+              </div>
+              <div className="p-4 rounded-xl bg-gray-50">
+                <h4 className="text-sm font-semibold text-gray-900 mb-1">Robustez de la evidencia</h4>
+                <p className="text-xs text-gray-600">El respaldo en metaanálisis, la replicación en múltiples estudios y la publicación en revistas indexadas con revisión por pares.</p>
+              </div>
+              <div className="p-4 rounded-xl bg-gray-50">
+                <h4 className="text-sm font-semibold text-gray-900 mb-1">Acción clínica posible</h4>
+                <p className="text-xs text-gray-600">La capacidad de traducir el hallazgo en una recomendación preventiva, nutricional, farmacológica o de seguimiento concreto.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -86,8 +136,8 @@ export default function IndiceAleloPage() {
                     </span>
                   )}
                 </div>
-                {mod.fullDescription === "" && (
-                  <p className="mt-4 text-xs text-amber-500">Descripción extendida por desarrollar</p>
+                {mod.interpretationGuide && (
+                  <p className="mt-4 text-xs text-gray-400 italic line-clamp-2">{mod.interpretationGuide}</p>
                 )}
               </div>
             ))}
