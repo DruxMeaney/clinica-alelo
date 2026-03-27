@@ -42,21 +42,19 @@ export const MAIN_NAV = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Índice Alelo", href: "/indice-alelo" },
   {
     label: "Ciencia",
     href: "#",
     children: [
+      { label: "Índice Alelo", href: "/indice-alelo" },
       { label: "Investigación", href: "/investigacion" },
       { label: "Genómica poblacional", href: "/genomica-poblacional" },
       { label: "Tecnología", href: "/tecnologia" },
       { label: "Ancestría", href: "/ancestria" },
     ],
   },
-  { label: "Proceso clínico", href: "/proceso-clinico" },
   { label: "Equipo", href: "/equipo" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
-  { label: "Contacto", href: "/contacto" },
 ];
 
 /** Todas las secciones del sitio con su esqueleto */

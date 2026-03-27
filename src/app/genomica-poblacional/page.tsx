@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import GlowOrbs from "@/components/ui/GlowOrbs";
 
 export const metadata: Metadata = {
   title: "Genómica poblacional y SNV",
@@ -10,15 +12,16 @@ export const metadata: Metadata = {
 export default function GenomicaPoblacionalPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
+      <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
+        <GlowOrbs />
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Genómica poblacional
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Genómica poblacional y SNV
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
             Por qué importa el contexto genético de México.
           </p>
         </div>
@@ -26,6 +29,18 @@ export default function GenomicaPoblacionalPage() {
 
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6 space-y-12">
+          {/* Imagen decorativa ADN */}
+          <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-purple-500/10">
+            <Image
+              src="/images/dna-helix.jpg"
+              alt="Estructura del ADN y variantes genéticas"
+              width={1200}
+              height={400}
+              className="w-full h-48 md:h-56 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#2d0a3e]/50 via-transparent to-[#2d0a3e]/50" />
+          </div>
+
           {/* SNVs */}
           <div className="p-8 rounded-2xl border border-gray-100 bg-white">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">

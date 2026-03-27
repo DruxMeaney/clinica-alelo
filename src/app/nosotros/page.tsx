@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import GlowOrbs from "@/components/ui/GlowOrbs";
 
 export const metadata: Metadata = {
   title: "Qué es Clínica Alelo",
@@ -11,15 +13,16 @@ export default function NosotrosPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
+      <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
+        <GlowOrbs />
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Nosotros
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Qué es Clínica Alelo
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
             Atención clínica e investigación genómica para una prevención más precisa en México.
           </p>
         </div>
@@ -37,6 +40,23 @@ export default function NosotrosPage() {
               posibilidad de conocer su perfil genético y traducirlo en estrategias de salud
               personalizadas.
             </p>
+          </div>
+
+          {/* Imagen decorativa */}
+          <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-purple-500/10">
+            <Image
+              src="/images/dna-abstract.jpg"
+              alt="Estructura de ADN — fundamento de la medicina genómica"
+              width={1200}
+              height={400}
+              className="w-full h-56 md:h-72 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#2d0a3e]/60 via-transparent to-[#2d0a3e]/60" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-white/80 text-sm font-medium tracking-wider uppercase">
+                Genómica &middot; Clínica &middot; Investigación &middot; Prevención
+              </p>
+            </div>
           </div>
 
           {/* Diagrama de intersección */}

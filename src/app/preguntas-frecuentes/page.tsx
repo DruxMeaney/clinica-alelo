@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import GlowOrbs from "@/components/ui/GlowOrbs";
 import { FAQS } from "@/data/faqs";
 
 export const metadata: Metadata = {
@@ -21,13 +22,14 @@ export default function PreguntasFrecuentesPage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
+      <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
+        <GlowOrbs />
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">FAQ</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Preguntas frecuentes
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
             Respuestas claras sobre genómica, el Índice Alelo y nuestro proceso.
           </p>
         </div>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import GlowOrbs from "@/components/ui/GlowOrbs";
 
 export const metadata: Metadata = {
   title: "Servicios clínicos y genómicos",
@@ -10,24 +12,31 @@ export const metadata: Metadata = {
 export default function ServiciosPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
-        <div className="max-w-4xl mx-auto px-6">
-          <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">Servicios</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+      <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
+        <GlowOrbs />
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-4">
+            <span className="text-xs font-medium text-purple-300 tracking-wider uppercase">Servicios</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Servicios clínicos y genómicos
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
             Tres pilares de atención personalizada basados en tu perfil genético.
           </p>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 bg-[#fafafa]">
         <div className="max-w-5xl mx-auto px-6 space-y-16">
           {/* Pilar 1: Cardiovascular */}
           <div className="grid md:grid-cols-5 gap-8 items-start">
             <div className="md:col-span-2">
-              <div className="w-14 h-1 rounded-full bg-[#1B4965] mb-4" />
+              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
+                <Image src="/images/cardiovascular.jpg" alt="Salud cardiovascular" width={400} height={250} className="w-full h-48 object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              <div className="w-14 h-1 rounded-full bg-[#8b2fa0] mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Riesgo cardiovascular
               </h2>
@@ -69,7 +78,11 @@ export default function ServiciosPage() {
           {/* Pilar 2: Nutrigenómica */}
           <div className="grid md:grid-cols-5 gap-8 items-start">
             <div className="md:col-span-2">
-              <div className="w-14 h-1 rounded-full bg-[#606C38] mb-4" />
+              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
+                <Image src="/images/nutrition.jpg" alt="Nutrigenómica y alimentación" width={400} height={250} className="w-full h-48 object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              <div className="w-14 h-1 rounded-full bg-[#8b5cf6] mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Nutrigenómica
               </h2>
@@ -109,7 +122,11 @@ export default function ServiciosPage() {
           {/* Pilar 3: Ejercicio */}
           <div className="grid md:grid-cols-5 gap-8 items-start">
             <div className="md:col-span-2">
-              <div className="w-14 h-1 rounded-full bg-[#3A7D44] mb-4" />
+              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
+                <Image src="/images/exercise.jpg" alt="Respuesta al ejercicio y rendimiento" width={400} height={250} className="w-full h-48 object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              <div className="w-14 h-1 rounded-full bg-[#e11d73] mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
                 Respuesta al ejercicio
               </h2>

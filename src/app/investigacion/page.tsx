@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import GlowOrbs from "@/components/ui/GlowOrbs";
 
 export const metadata: Metadata = {
   title: "Investigación",
@@ -10,15 +12,16 @@ export const metadata: Metadata = {
 export default function InvestigacionPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-white via-gray-50 to-purple-50/30 py-20">
+      <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
+        <GlowOrbs />
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-sm font-medium text-[#8b2fa0] tracking-widest uppercase mb-4">
             Investigación
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
             Investigación y generación de conocimiento
           </h1>
-          <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+          <p className="mt-4 text-lg text-gray-300 max-w-2xl">
             No solo atendemos. Investigamos, publicamos y construimos conocimiento
             para la medicina de precisión en México.
           </p>
@@ -35,6 +38,18 @@ export default function InvestigacionPage() {
               de datos genéticos y epidemiológicos constituye uno de los pilares fundamentales del
               proyecto.
             </p>
+          </div>
+
+          {/* Imagen decorativa */}
+          <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-purple-500/10">
+            <Image
+              src="/images/laboratory.jpg"
+              alt="Laboratorio de investigación genómica"
+              width={1200}
+              height={400}
+              className="w-full h-56 md:h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
           </div>
 
           {/* Líneas de investigación */}
