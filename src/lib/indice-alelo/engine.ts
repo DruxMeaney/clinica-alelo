@@ -338,21 +338,18 @@ export function calcularSNV(
     postRR = post.postRR;
     postRV = post.postRV;
     postVV = post.postVV;
-    pi = calcularPi(postRR, postRV, postVV, model);
 
-    // Mezcla por cobertura (shrinkage)
-    if (mezclaCobertura && reading!.n > 0) {
-      const piCont = calcularPi(0, 0, 1, model) * (reading!.k / reading!.n)
-                   + calcularPi(0, 1, 0, model) * Math.min(1, 2 * (reading!.k / reading!.n) * (1 - reading!.k / reading!.n) * 4)
-                   + calcularPi(1, 0, 0, model) * (1 - reading!.k / reading!.n);
-      // Simplificación: usar r directamente como Pi continuo para modelo aditivo
-      const piDirect = reading!.k / reading!.n;
-      const w = reading!.n / (reading!.n + n0);
-      pi = w * piDirect + (1 - w) * pi;
-      log += ` | BAYES+mezcla(w=${w.toFixed(3)})`;
-    } else {
-      log += " | BAYES";
-    }
+    // Pi = Σ S(G) × Pr(G|k,n)  — valor esperado del efecto (ecuación central del PDF)
+    pi = calcularPi(postRR, postRV, postVV, model);
+    log += " | BAYES";
+
+    // Nota metodológica: NO mezclamos con k/n crudo.
+    // El posterior bayesiano ya incorpora la evidencia de las lecturas.
+    // Mezclar con r=k/n sería doble-contar los datos.
+    // Si la cobertura es baja, el posterior naturalmente se acerca a los priors.
+    // Si la cobertura es alta, el posterior converge al MLE.
+    // Esto es exactamente el comportamiento deseado de un estimador bayesiano.
+
     modoUsado = "BAYES";
   } else if (useBayes && !hasReading && fallbackHW) {
     pi = calcularPi(pRR, pRV, pVV, model);
