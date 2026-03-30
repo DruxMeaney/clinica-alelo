@@ -397,12 +397,16 @@ export function calcularSNV(
  * Calcula el índice de un módulo completo.
  *
  * Según IndiceAlelo.pdf sección 7:
- *   R_g = Σ(Pi × Wi) para variantes de riesgo, con ΣWi(riesgo) = 100
+ *   R_g = Σ(Pi × Wi) para variantes de riesgo
  *   B_g = Σ(Pi × Wi) para variantes protectoras
- *   Índice = max(0, R_g − B_g)  [o B_g − R_g para módulo 3]
+ *   Índice bruto = max(0, R_g − B_g)  [o B_g − R_g para módulo 3]
  *
- * Dado que ΣWi(riesgo) = 100 y 0 ≤ Pi ≤ 1, se garantiza R_g ∈ [0, 100].
- * El índice neto puede ser menor que R_g por el efecto protector.
+ * Normalización dinámica:
+ *   El PDF requiere ΣWi(riesgo) = 100 para garantizar escala 0-100.
+ *   Si los pesos originales no suman exactamente 100, normalizamos:
+ *     Índice = (Índice_bruto / ΣWi_dominante) × 100
+ *   donde ΣWi_dominante = ΣWi_riesgo (o ΣWi_protectora para M3).
+ *   Esto preserva las proporciones relativas entre variantes.
  */
 export function calcularModulo(
   snvs: SNVRecord[],
@@ -419,6 +423,8 @@ export function calcularModulo(
   const results: SNVResult[] = [];
   let riesgoTotal = 0;
   let protectoraTotal = 0;
+  let sumWiRiesgo = 0;
+  let sumWiProtectora = 0;
 
   for (const snv of moduloSNVs) {
     const reading = readings.get(snv.rsID) ?? null;
@@ -427,15 +433,24 @@ export function calcularModulo(
 
     if (result.esProtectora) {
       protectoraTotal += result.aporte;
+      sumWiProtectora += snv.wi;
     } else {
       riesgoTotal += result.aporte;
+      sumWiRiesgo += snv.wi;
     }
   }
 
   // Módulo 3: polaridad invertida (beneficio − riesgo)
-  const indice = moduloNum === 3
+  const indiceBruto = moduloNum === 3
     ? Math.max(0, protectoraTotal - riesgoTotal)
     : Math.max(0, riesgoTotal - protectoraTotal);
+
+  // Normalización a escala 0-100
+  // ΣWi_dominante es la suma de pesos del grupo que define el máximo teórico
+  const sumWiDominante = moduloNum === 3 ? sumWiProtectora : sumWiRiesgo;
+  const indice = sumWiDominante > 0
+    ? (indiceBruto / sumWiDominante) * 100
+    : 0;
 
   return {
     modulo: moduloNum,
