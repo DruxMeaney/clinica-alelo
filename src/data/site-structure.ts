@@ -55,6 +55,7 @@ export const MAIN_NAV = [
   },
   { label: "Equipo", href: "/equipo" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
+  { label: "Área clínica", href: "/clinica" },
 ];
 
 /** Todas las secciones del sitio con su esqueleto */
