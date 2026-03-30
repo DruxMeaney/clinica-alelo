@@ -5,15 +5,12 @@ import {
   MODULOS,
   POBLACIONES,
   calcularModulo,
-  calcularPi,
-  resolverPriors,
   esProtectora,
   type SNVRecord,
   type SNVReading,
   type ModuleResult,
-  type PatientProfile,
 } from "@/lib/indice-alelo/engine";
-import { parseSNVcsv, parseReadingsCSV } from "@/lib/indice-alelo/csv-parser";
+import { parseSNVcsv, parseReadingsCSV, applyInheritanceModels } from "@/lib/indice-alelo/csv-parser";
 
 // ─── Tipos UI ────────────────────────────────────────────────────────
 
@@ -52,13 +49,16 @@ export default function ClinicaApp() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const readingsInputRef = useRef<HTMLInputElement>(null);
 
-  // Cargar base de datos al montar
+  // Cargar base de datos y modelos de herencia al montar
   useEffect(() => {
-    fetch("/data/SNV_completa.csv")
-      .then(r => r.text())
-      .then(text => {
-        const records = parseSNVcsv(text);
+    Promise.all([
+      fetch("/data/SNV_completa.csv").then(r => r.text()),
+      fetch("/data/inheritance_models.json").then(r => r.json()).catch(() => ({})),
+    ])
+      .then(([csvText, inheritanceData]) => {
+        let records = parseSNVcsv(csvText);
         if (records.length === 0) throw new Error("No se encontraron registros en el CSV");
+        records = applyInheritanceModels(records, inheritanceData);
         setSnvDB(records);
         // Inicializar estados de módulos
         const states: Record<number, ModuleState> = {};
@@ -155,11 +155,11 @@ export default function ClinicaApp() {
 
   // Función: exportar resultados
   const exportResults = useCallback(() => {
-    const rows: string[] = ["Módulo,Nombre,Índice,Índice Normalizado (0-100),Riesgo Total,Protectora Total,SNVs"];
+    const rows: string[] = ["Módulo,Nombre,Índice (0-100),Riesgo Total,Protectora Total,SNVs"];
     for (let m = 1; m <= 7; m++) {
       const r = moduleStates[m]?.result;
       if (r) {
-        rows.push(`${m},"${r.nombre}",${r.indice.toFixed(4)},${r.indiceNormalizado.toFixed(1)},${r.riesgoTotal.toFixed(4)},${r.protectoraTotal.toFixed(4)},${r.snvCount}`);
+        rows.push(`${m},"${r.nombre}",${r.indice.toFixed(2)},${r.riesgoTotal.toFixed(4)},${r.protectoraTotal.toFixed(4)},${r.snvCount}`);
       }
     }
     const blob = new Blob([rows.join("\n")], { type: "text/csv" });
@@ -182,7 +182,7 @@ export default function ClinicaApp() {
           m, snv.rsID, snv.gene, snv.tipo, snv.wi, snv.n ?? "", snv.k ?? "",
           snv.prior0.toFixed(6), snv.prior1.toFixed(6), snv.prior2.toFixed(6),
           snv.post0.toFixed(6), snv.post1.toFixed(6), snv.post2.toFixed(6),
-          snv.pi.toFixed(6), snv.piFinal.toFixed(6), snv.aporte.toFixed(6), snv.modo
+          snv.pi.toFixed(6), snv.pi.toFixed(6), snv.aporte.toFixed(6), snv.modo
         ].join(","));
       }
     }
@@ -390,7 +390,7 @@ export default function ClinicaApp() {
                     </span>
                     {state?.calculated ? (
                       <span className="text-[10px] font-mono text-emerald-400">
-                        {state.result?.indiceNormalizado.toFixed(0)}
+                        {state.result?.indice.toFixed(0)}
                       </span>
                     ) : (
                       <span className="w-2 h-2 rounded-full bg-gray-600" />
@@ -477,7 +477,7 @@ function OverviewPanel({ moduleStates, snvDB, onSelectModule }: {
                 <span className="text-[10px] font-mono text-gray-500">M{m}</span>
                 {state?.calculated && (
                   <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    {state.result?.indiceNormalizado.toFixed(1)}
+                    {state.result?.indice.toFixed(1)}
                   </span>
                 )}
               </div>
@@ -495,10 +495,10 @@ function OverviewPanel({ moduleStates, snvDB, onSelectModule }: {
                     <div
                       className="h-full rounded-full transition-all duration-500"
                       style={{
-                        width: `${Math.min(100, state.result.indiceNormalizado)}%`,
-                        background: state.result.indiceNormalizado > 60
+                        width: `${Math.min(100, state.result.indice)}%`,
+                        background: state.result.indice > 60
                           ? "linear-gradient(90deg, #f59e0b, #ef4444)"
-                          : state.result.indiceNormalizado > 30
+                          : state.result.indice > 30
                           ? "linear-gradient(90deg, #8b5cf6, #f59e0b)"
                           : "linear-gradient(90deg, #10b981, #8b5cf6)",
                       }}
@@ -566,7 +566,7 @@ function ModuleView({ modNum, snvs, state, poblacion, onUpdateReading, onCalcula
             <div>
               <p className="text-[10px] text-gray-400 uppercase tracking-wider">Índice normalizado</p>
               <p className="text-3xl font-bold font-mono text-purple-300">
-                {state.result.indiceNormalizado.toFixed(1)}
+                {state.result.indice.toFixed(1)}
                 <span className="text-sm text-gray-500 ml-1">/ 100</span>
               </p>
             </div>
@@ -659,7 +659,7 @@ function ModuleView({ modNum, snvs, state, poblacion, onUpdateReading, onCalcula
                         {state.calculated && result && (
                           <>
                             <span className="px-3 py-2.5 text-center text-gray-300 w-16 flex-shrink-0 font-mono">
-                              {result.piFinal.toFixed(3)}
+                              {result.pi.toFixed(3)}
                             </span>
                             <span className={`px-3 py-2.5 text-center w-16 flex-shrink-0 font-mono ${isProtec ? "text-emerald-400" : "text-red-400"}`}>
                               {result.aporte.toFixed(2)}
@@ -756,16 +756,16 @@ function ResultsView({ moduleStates, nombre, codigo }: {
               <div
                 className="h-full rounded-full transition-all duration-700"
                 style={{
-                  width: `${Math.min(100, r.indiceNormalizado)}%`,
-                  background: r.indiceNormalizado > 60
+                  width: `${Math.min(100, r.indice)}%`,
+                  background: r.indice > 60
                     ? "linear-gradient(90deg, #f59e0b, #ef4444)"
-                    : r.indiceNormalizado > 30
+                    : r.indice > 30
                     ? "linear-gradient(90deg, #a855f7, #f59e0b)"
                     : "linear-gradient(90deg, #10b981, #a855f7)",
                 }}
               />
               <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/70">
-                {r.indiceNormalizado.toFixed(1)}
+                {r.indice.toFixed(1)}
               </span>
             </div>
           </div>
@@ -791,10 +791,10 @@ function ResultsView({ moduleStates, nombre, codigo }: {
                 <td className="px-4 py-2.5 text-gray-300">{r.modNum}. {MODULOS[r.modNum]}</td>
                 <td className="px-4 py-2.5 text-center">
                   <span className={`font-mono font-bold ${
-                    r.indiceNormalizado > 60 ? "text-red-400" :
-                    r.indiceNormalizado > 30 ? "text-amber-400" : "text-emerald-400"
+                    r.indice > 60 ? "text-red-400" :
+                    r.indice > 30 ? "text-amber-400" : "text-emerald-400"
                   }`}>
-                    {r.indiceNormalizado.toFixed(1)}
+                    {r.indice.toFixed(1)}
                   </span>
                 </td>
                 <td className="px-4 py-2.5 text-center font-mono text-gray-400">{r.indice.toFixed(4)}</td>

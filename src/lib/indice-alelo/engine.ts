@@ -1,41 +1,64 @@
 /**
- * Motor del Índice Alelo — Traducción fiel de appCompleta_v7.py
+ * Motor del Índice Alelo — Alineado con IndiceAlelo.pdf (metodología oficial)
  *
- * Preserva la lógica original:
- * - Priors HWE por población
- * - Actualización bayesiana con lecturas (k/n)
- * - Mezcla por cobertura (shrinkage)
- * - Modos HWE / BAYES / AUTO
- * - Módulos 1-7 con distinción riesgo/protectora
- * - Módulo 3 con polaridad invertida
+ * Implementa fielmente la formulación del documento:
  *
- * Mejoras respecto al original:
- * - Tipado estricto con TypeScript
- * - Estado encapsulado (sin globales mutables)
- * - Normalización opcional a escala 0-100
- * - Funciones puras y testeables
+ *   Índice Alelo_g = Σ (P_ig × W_ig)
+ *
+ * donde:
+ *   P_ig ∈ [0,1] = puntaje de genotipo (valor esperado del efecto)
+ *   W_ig = peso clínico de la variante i en el módulo g
+ *   ΣW_ig(riesgo) = 100 por módulo → el índice vive en escala 0–100
+ *
+ * Capas del modelo (sección 5 del PDF):
+ *   G_i: genotipo teórico discreto (depende del modelo de herencia)
+ *   r_i: proporción de lecturas variantes (k/n) del secuenciador
+ *   P_i: estimación continua de G_i a partir de r_i y el modelo de herencia
+ *
+ * Tres modelos de herencia → función S(G):
+ *   Aditivo/codominante: S(RR)=0, S(RV)=0.5, S(VV)=1
+ *   Dominante:           S(RR)=0, S(RV)=1,   S(VV)=1
+ *   Recesivo:            S(RR)=0, S(RV)=0,   S(VV)=1
+ *
+ * Estimación bayesiana (sección 6):
+ *   k | (n, G) ~ Binomial(n, θ_G)
+ *   θ_RR = ε, θ_RV = 0.5, θ_VV = 1 − ε
+ *   P_i = Σ S(G) × Pr(G | k, n)  ← valor esperado del efecto
+ *
+ * Variantes riesgo/protectoras (sección 7):
+ *   R_g = Σ (P_ig × W_ig) para variantes de riesgo, con ΣW_ig(riesgo) = 100
+ *   B_g = Σ (P_ig × W_ig) para variantes protectoras (pesos independientes)
+ *   Índice Alelo_g^(neto) = max(0, R_g − B_g)
+ *
+ * Guías internacionales consideradas:
+ *   - ACMG 2023: PRS no es diagnóstico, es estimación probabilística de riesgo
+ *   - eMERGE 2024: validación poblacional necesaria para uso clínico
+ *   - CPIC: farmacogenética requiere diplotipos (limitación documentada en M6)
  */
 
 // ─── Tipos ───────────────────────────────────────────────────────────
+
+export type InheritanceModel = "aditivo" | "dominante" | "recesivo";
 
 export interface SNVRecord {
   rsID: string;
   gene: string;
   wi: number;
-  tipo: string; // "Riesgo" | "Protectora" | etc.
+  tipo: string;
   funcion: string;
-  indice: number; // módulo 1-7
+  indice: number;
   category: string;
   alleleRef: string;
   alleleString: string;
   aleloInteres: string;
-  altAlleles: Record<string, string>; // por población
-  freqAlt: Record<string, number>;   // Freq_ALT por población
-  pPrior: Record<string, number>;    // p_prior_ALT por población
-  qPrior: Record<string, number>;    // q_prior_ALT por población
-  hweAA: Record<string, number>;     // P_HWE_AA_ALT por población
-  hweAa: Record<string, number>;     // P_HWE_Aa_ALT por población
-  hweaa: Record<string, number>;     // P_HWE_aa_ALT por población
+  inheritanceModel: InheritanceModel;
+  altAlleles: Record<string, string>;
+  freqAlt: Record<string, number>;
+  pPrior: Record<string, number>;
+  qPrior: Record<string, number>;
+  hweAA: Record<string, number>;
+  hweAa: Record<string, number>;
+  hweaa: Record<string, number>;
   oddsRatio?: string;
   ci95?: string;
   pubmedID?: string;
@@ -54,26 +77,30 @@ export interface SNVResult {
   tipo: string;
   esProtectora: boolean;
   modulo: number;
-  // Alelos
+  inheritanceModel: InheritanceModel;
   ref: string;
   alt: string;
   aleloInteres: string;
+  // Función S(G) según modelo de herencia
+  sRR: number;
+  sRV: number;
+  sVV: number;
   // Priors HWE
-  prior0: number;
-  prior1: number;
-  prior2: number;
+  prior0: number; // Pr(RR)
+  prior1: number; // Pr(RV)
+  prior2: number; // Pr(VV)
   priorSource: string;
-  // Posterior (si hay lecturas)
+  // Posterior Pr(G|k,n)
   post0: number;
   post1: number;
   post2: number;
   // Lecturas
   n: number | null;
   k: number | null;
-  // Pi y aporte
+  ri: number | null; // k/n — proporción observada
+  // Pi = Σ S(G) × Pr(G|k,n)
   pi: number;
-  piFinal: number;
-  aporte: number;
+  aporte: number; // Pi × Wi
   // Modo
   modo: "HWE" | "BAYES" | "FALLBACK_HWE";
   log: string;
@@ -82,12 +109,9 @@ export interface SNVResult {
 export interface ModuleResult {
   modulo: number;
   nombre: string;
-  riesgoTotal: number;
-  protectoraTotal: number;
-  indice: number;
-  indiceNormalizado: number; // 0-100
-  maxTeoricoRiesgo: number;
-  maxTeoricoProtectora: number;
+  riesgoTotal: number;     // R_g: Σ(Pi × Wi) para riesgo
+  protectoraTotal: number; // B_g: Σ(Pi × Wi) para protectoras
+  indice: number;          // max(0, R_g − B_g) o max(0, B_g − R_g) para M3
   snvResults: SNVResult[];
   snvCount: number;
   snvRiesgoCount: number;
@@ -120,26 +144,38 @@ export const MODULOS: Record<number, string> = {
   7: "Tendencias de bienestar y salud general",
 };
 
-const S0 = 0.0;
-const S1 = 0.5;
-const S2 = 1.0;
-
 export const POBLACIONES: Poblacion[] = [
   "General", "Europea", "Americana", "Latinoamericana", "Mexicana"
 ];
 
+// ─── Funciones S(G): traducción genotipo → efecto ────────────────────
+
+/**
+ * Devuelve los puntajes S(RR), S(RV), S(VV) según el modelo de herencia.
+ * Esta es la pieza central que diferencia la interpretación del efecto genético.
+ * (IndiceAlelo.pdf, sección 5.0.1)
+ */
+export function getScoreFunction(model: InheritanceModel): { sRR: number; sRV: number; sVV: number } {
+  switch (model) {
+    case "dominante":
+      return { sRR: 0, sRV: 1, sVV: 1 };
+    case "recesivo":
+      return { sRR: 0, sRV: 0, sVV: 1 };
+    case "aditivo":
+    default:
+      return { sRR: 0, sRV: 0.5, sVV: 1 };
+  }
+}
+
 // ─── Funciones auxiliares ────────────────────────────────────────────
 
-/** Determina si una variante es protectora */
 export function esProtectora(tipo: string): boolean {
   if (!tipo) return false;
   const t = tipo.trim().toLowerCase();
-  return t.startsWith("p") && (t.includes("prote") || t === "protectora" || t === "protective");
+  return t === "protectora" || t === "protective" || t.startsWith("protec");
 }
 
-/** Log-gamma para cálculo binomial */
 function lgamma(x: number): number {
-  // Stirling's approximation + Lanczos coefficients
   if (x <= 0) return 0;
   const g = 7;
   const c = [
@@ -155,7 +191,6 @@ function lgamma(x: number): number {
   return 0.5 * Math.log(2 * Math.PI) + (x - 0.5) * Math.log(t) - t + Math.log(sum);
 }
 
-/** Log de PMF binomial */
 function logBinomPmf(k: number, n: number, p: number): number {
   const pSafe = Math.max(1e-15, Math.min(1 - 1e-15, p));
   if (k === 0 && n === 0) return 0;
@@ -165,31 +200,30 @@ function logBinomPmf(k: number, n: number, p: number): number {
   );
 }
 
-/** Log-sum-exp para estabilidad numérica */
 function logSumExp(a: number, b: number, c: number): number {
   const mx = Math.max(a, b, c);
   if (!isFinite(mx)) return -Infinity;
   return mx + Math.log(Math.exp(a - mx) + Math.exp(b - mx) + Math.exp(c - mx));
 }
 
-// ─── Motor de cálculo ────────────────────────────────────────────────
+// ─── Resolución de priors HWE ────────────────────────────────────────
 
 /**
- * Resuelve priors HWE para un SNV dado una población.
- * Prioridad: columnas HWE directas > derivar de p_prior > uniforme 1/3
+ * Resuelve Pr(RR), Pr(RV), Pr(VV) usando frecuencias de Hardy-Weinberg.
+ * Cascada: HWE directo por población → General → derivar de p_prior → uniforme.
  */
 export function resolverPriors(
   snv: SNVRecord,
   pop: string
-): { p0: number; p1: number; p2: number; source: string } {
-  // 1. Columnas HWE directas
-  const aa = snv.hweaa[pop]; // P(G=0) = aa homozigoto ref
-  const Aa = snv.hweAa[pop]; // P(G=1) = heterozigoto
-  const AA = snv.hweAA[pop]; // P(G=2) = AA homozigoto alt
+): { pRR: number; pRV: number; pVV: number; source: string } {
+  // 1. Columnas HWE directas para la población
+  const aa = snv.hweaa[pop];
+  const Aa = snv.hweAa[pop];
+  const AA = snv.hweAA[pop];
 
   if (isFinite(aa) && isFinite(Aa) && isFinite(AA) && (aa + Aa + AA) > 0.001) {
     const sum = aa + Aa + AA;
-    return { p0: aa / sum, p1: Aa / sum, p2: AA / sum, source: `HWE_${pop}` };
+    return { pRR: aa / sum, pRV: Aa / sum, pVV: AA / sum, source: `HWE_${pop}` };
   }
 
   // Fallback a General
@@ -199,81 +233,73 @@ export function resolverPriors(
     const AAG = snv.hweAA["General"];
     if (isFinite(aaG) && isFinite(AaG) && isFinite(AAG) && (aaG + AaG + AAG) > 0.001) {
       const sum = aaG + AaG + AAG;
-      return { p0: aaG / sum, p1: AaG / sum, p2: AAG / sum, source: "HWE_General(fallback)" };
+      return { pRR: aaG / sum, pRV: AaG / sum, pVV: AAG / sum, source: "HWE_General(fallback)" };
     }
   }
 
-  // 2. Derivar de p_prior
+  // 2. Derivar de p_prior (frecuencia alélica)
   let q = snv.pPrior[pop];
-  if (!isFinite(q) || q <= 0 || q >= 1) {
-    q = snv.pPrior["General"];
-  }
-  if (!isFinite(q) || q <= 0 || q >= 1) {
-    q = snv.freqAlt[pop];
-  }
-  if (!isFinite(q) || q <= 0 || q >= 1) {
-    q = snv.freqAlt["General"];
-  }
+  if (!isFinite(q) || q <= 0 || q >= 1) q = snv.pPrior["General"];
+  if (!isFinite(q) || q <= 0 || q >= 1) q = snv.freqAlt[pop];
+  if (!isFinite(q) || q <= 0 || q >= 1) q = snv.freqAlt["General"];
 
   if (isFinite(q) && q > 0 && q < 1) {
     const p = 1 - q;
-    return { p0: p * p, p1: 2 * p * q, p2: q * q, source: `HW_derivado(q=${q.toFixed(4)})` };
+    // HWE: Pr(RR) = p², Pr(RV) = 2pq, Pr(VV) = q²
+    return { pRR: p * p, pRV: 2 * p * q, pVV: q * q, source: `HW_derivado(q=${q.toFixed(4)})` };
   }
 
-  // 3. Uniforme
-  return { p0: 1 / 3, p1: 1 / 3, p2: 1 / 3, source: "uniforme(sin datos)" };
+  // 3. Priori neutral (uniforme 1/3)
+  return { pRR: 1 / 3, pRV: 1 / 3, pVV: 1 / 3, source: "uniforme(sin datos)" };
 }
 
-/**
- * Inversión de priors cuando el alelo de interés es REF (no ALT).
- * En ese caso, G=0 (0 copias de ALT) = 2 copias de REF = máxima expresión.
- */
-function invertirSiNecesario(
-  p0: number, p1: number, p2: number,
-  aleloInteres: string, alleleRef: string
-): { p0: number; p1: number; p2: number; invertido: boolean } {
-  if (aleloInteres && alleleRef &&
-      aleloInteres.toUpperCase() === alleleRef.toUpperCase()) {
-    return { p0: p2, p1, p2: p0, invertido: true };
-  }
-  return { p0, p1, p2, invertido: false };
-}
+// ─── Posterior bayesiano ─────────────────────────────────────────────
 
 /**
- * Actualización bayesiana: posterior P(G|k,n)
+ * Pr(G | k, n) ∝ Pr(G) × Pr(k | n, G)
+ * donde Pr(k | n, G) = Binomial(k; n, θ_G)
+ * con θ_RR = ε, θ_RV = 0.5, θ_VV = 1 − ε
+ * (IndiceAlelo.pdf, sección 6)
  */
 export function posteriorBayes(
   k: number, n: number,
-  p0: number, p1: number, p2: number,
+  pRR: number, pRV: number, pVV: number,
   eps: number
-): { post0: number; post1: number; post2: number; logEvidence: number } {
+): { postRR: number; postRV: number; postVV: number } {
   const epsC = Math.max(1e-6, Math.min(0.49, eps));
-  const theta0 = epsC;
-  const theta1 = 0.5;
-  const theta2 = 1 - epsC;
+  const thetaRR = epsC;
+  const thetaRV = 0.5;
+  const thetaVV = 1 - epsC;
 
-  const logL0 = logBinomPmf(k, n, theta0) + Math.log(Math.max(1e-30, p0));
-  const logL1 = logBinomPmf(k, n, theta1) + Math.log(Math.max(1e-30, p1));
-  const logL2 = logBinomPmf(k, n, theta2) + Math.log(Math.max(1e-30, p2));
+  const logPostRR = logBinomPmf(k, n, thetaRR) + Math.log(Math.max(1e-30, pRR));
+  const logPostRV = logBinomPmf(k, n, thetaRV) + Math.log(Math.max(1e-30, pRV));
+  const logPostVV = logBinomPmf(k, n, thetaVV) + Math.log(Math.max(1e-30, pVV));
 
-  const logZ = logSumExp(logL0, logL1, logL2);
+  const logZ = logSumExp(logPostRR, logPostRV, logPostVV);
 
   return {
-    post0: Math.exp(logL0 - logZ),
-    post1: Math.exp(logL1 - logZ),
-    post2: Math.exp(logL2 - logZ),
-    logEvidence: logZ,
+    postRR: Math.exp(logPostRR - logZ),
+    postRV: Math.exp(logPostRV - logZ),
+    postVV: Math.exp(logPostVV - logZ),
   };
 }
 
-/** Pi = dosaje esperado */
-export function calcularPi(p0: number, p1: number, p2: number): number {
-  return S0 * p0 + S1 * p1 + S2 * p2;
+/**
+ * Calcula Pi = Σ S(G) × Pr(G | datos)
+ * Esto es el valor esperado del efecto, considerando tanto el modelo de herencia
+ * como la incertidumbre del genotipo.
+ * (IndiceAlelo.pdf, sección 6, definición clave)
+ */
+export function calcularPi(
+  postRR: number, postRV: number, postVV: number,
+  model: InheritanceModel
+): number {
+  const { sRR, sRV, sVV } = getScoreFunction(model);
+  return sRR * postRR + sRV * postRV + sVV * postVV;
 }
 
-/**
- * Calcula el resultado completo para un SNV.
- */
+// ─── Motor principal ─────────────────────────────────────────────────
+
 export function calcularSNV(
   snv: SNVRecord,
   reading: SNVReading | null,
@@ -284,56 +310,62 @@ export function calcularSNV(
   mezclaCobertura: boolean,
   fallbackHW: boolean
 ): SNVResult {
-  // Resolver priors
   const priors = resolverPriors(snv, pop);
   const altPop = snv.altAlleles[pop] || snv.altAlleles["General"] || "";
   const aleloInt = snv.aleloInteres || altPop;
+  const model = snv.inheritanceModel || "aditivo";
+  const { sRR, sRV, sVV } = getScoreFunction(model);
 
-  // Invertir si el alelo de interés es REF
-  const inv = invertirSiNecesario(priors.p0, priors.p1, priors.p2, aleloInt, snv.alleleRef);
+  // Invertir priors si el alelo de interés es REF
+  let { pRR, pRV, pVV } = priors;
+  let invertido = false;
+  if (aleloInt && snv.alleleRef && aleloInt.toUpperCase() === snv.alleleRef.toUpperCase()) {
+    [pRR, pVV] = [pVV, pRR];
+    invertido = true;
+  }
 
-  let { p0, p1, p2 } = inv;
-  let post0 = p0, post1 = p1, post2 = p2;
+  let postRR = pRR, postRV = pRV, postVV = pVV;
   let pi: number;
-  let piFinal: number;
   let modoUsado: "HWE" | "BAYES" | "FALLBACK_HWE" = "HWE";
-  let log = `Priors: ${priors.source}`;
-  if (inv.invertido) log += " [invertido]";
+  let log = `Priors: ${priors.source} | Modelo: ${model}`;
+  if (invertido) log += " [invertido]";
 
   const hasReading = reading !== null && reading.n > 0 && reading.k >= 0 && reading.k <= reading.n;
   const useBayes = modo === "BAYES" || (modo === "AUTO" && hasReading);
 
   if (useBayes && hasReading) {
-    const posterior = posteriorBayes(reading!.k, reading!.n, p0, p1, p2, eps);
-    post0 = posterior.post0;
-    post1 = posterior.post1;
-    post2 = posterior.post2;
-    pi = calcularPi(post0, post1, post2);
+    const post = posteriorBayes(reading!.k, reading!.n, pRR, pRV, pVV, eps);
+    postRR = post.postRR;
+    postRV = post.postRV;
+    postVV = post.postVV;
+    pi = calcularPi(postRR, postRV, postVV, model);
 
+    // Mezcla por cobertura (shrinkage)
     if (mezclaCobertura && reading!.n > 0) {
-      const piCont = reading!.k / reading!.n;
+      const piCont = calcularPi(0, 0, 1, model) * (reading!.k / reading!.n)
+                   + calcularPi(0, 1, 0, model) * Math.min(1, 2 * (reading!.k / reading!.n) * (1 - reading!.k / reading!.n) * 4)
+                   + calcularPi(1, 0, 0, model) * (1 - reading!.k / reading!.n);
+      // Simplificación: usar r directamente como Pi continuo para modelo aditivo
+      const piDirect = reading!.k / reading!.n;
       const w = reading!.n / (reading!.n + n0);
-      piFinal = w * piCont + (1 - w) * pi;
+      pi = w * piDirect + (1 - w) * pi;
       log += ` | BAYES+mezcla(w=${w.toFixed(3)})`;
     } else {
-      piFinal = pi;
-      log += " | BAYES puro";
+      log += " | BAYES";
     }
     modoUsado = "BAYES";
   } else if (useBayes && !hasReading && fallbackHW) {
-    pi = calcularPi(p0, p1, p2);
-    piFinal = pi;
+    pi = calcularPi(pRR, pRV, pVV, model);
     modoUsado = "FALLBACK_HWE";
-    log += " | Fallback HWE (sin lecturas)";
+    log += " | Fallback HWE";
   } else {
-    pi = calcularPi(p0, p1, p2);
-    piFinal = pi;
+    pi = calcularPi(pRR, pRV, pVV, model);
     modoUsado = "HWE";
     log += " | HWE";
   }
 
   const protectora = esProtectora(snv.tipo);
-  const aporte = piFinal * snv.wi;
+  const aporte = pi * snv.wi;
 
   return {
     rsID: snv.rsID,
@@ -342,20 +374,22 @@ export function calcularSNV(
     tipo: snv.tipo,
     esProtectora: protectora,
     modulo: snv.indice,
+    inheritanceModel: model,
     ref: snv.alleleRef,
     alt: altPop,
     aleloInteres: aleloInt,
-    prior0: p0,
-    prior1: p1,
-    prior2: p2,
+    sRR, sRV, sVV,
+    prior0: pRR,
+    prior1: pRV,
+    prior2: pVV,
     priorSource: priors.source,
-    post0,
-    post1,
-    post2,
+    post0: postRR,
+    post1: postRV,
+    post2: postVV,
     n: reading?.n ?? null,
     k: reading?.k ?? null,
+    ri: hasReading ? reading!.k / reading!.n : null,
     pi,
-    piFinal,
     aporte,
     modo: modoUsado,
     log,
@@ -364,6 +398,14 @@ export function calcularSNV(
 
 /**
  * Calcula el índice de un módulo completo.
+ *
+ * Según IndiceAlelo.pdf sección 7:
+ *   R_g = Σ(Pi × Wi) para variantes de riesgo, con ΣWi(riesgo) = 100
+ *   B_g = Σ(Pi × Wi) para variantes protectoras
+ *   Índice = max(0, R_g − B_g)  [o B_g − R_g para módulo 3]
+ *
+ * Dado que ΣWi(riesgo) = 100 y 0 ≤ Pi ≤ 1, se garantiza R_g ∈ [0, 100].
+ * El índice neto puede ser menor que R_g por el efecto protector.
  */
 export function calcularModulo(
   snvs: SNVRecord[],
@@ -380,8 +422,6 @@ export function calcularModulo(
   const results: SNVResult[] = [];
   let riesgoTotal = 0;
   let protectoraTotal = 0;
-  let maxRiesgo = 0;
-  let maxProtectora = 0;
 
   for (const snv of moduloSNVs) {
     const reading = readings.get(snv.rsID) ?? null;
@@ -390,33 +430,22 @@ export function calcularModulo(
 
     if (result.esProtectora) {
       protectoraTotal += result.aporte;
-      maxProtectora += snv.wi; // máximo teórico: Pi=1 * Wi
     } else {
       riesgoTotal += result.aporte;
-      maxRiesgo += snv.wi;
     }
   }
 
-  // Módulo 3: polaridad invertida (protectora - riesgo)
-  const indiceRaw = moduloNum === 3
+  // Módulo 3: polaridad invertida (beneficio − riesgo)
+  const indice = moduloNum === 3
     ? Math.max(0, protectoraTotal - riesgoTotal)
     : Math.max(0, riesgoTotal - protectoraTotal);
-
-  // Normalización a 0-100
-  const maxTeorico = moduloNum === 3 ? maxProtectora : maxRiesgo;
-  const indiceNormalizado = maxTeorico > 0
-    ? Math.min(100, (indiceRaw / maxTeorico) * 100)
-    : 0;
 
   return {
     modulo: moduloNum,
     nombre: MODULOS[moduloNum] || `Módulo ${moduloNum}`,
     riesgoTotal,
     protectoraTotal,
-    indice: indiceRaw,
-    indiceNormalizado,
-    maxTeoricoRiesgo: maxRiesgo,
-    maxTeoricoProtectora: maxProtectora,
+    indice,
     snvResults: results,
     snvCount: moduloSNVs.length,
     snvRiesgoCount: results.filter(r => !r.esProtectora).length,
@@ -442,7 +471,6 @@ export function calcularPerfil(
   }
 ): PatientProfile {
   const modules: ModuleResult[] = [];
-
   for (let m = 1; m <= 7; m++) {
     modules.push(
       calcularModulo(

@@ -3,7 +3,7 @@
  * Transforma las 71 columnas del CSV maestro a SNVRecord[]
  */
 
-import type { SNVRecord } from "./engine";
+import type { SNVRecord, InheritanceModel } from "./engine";
 
 const POPS = ["General", "Europea", "Americana", "Latinoamericana", "Mexicana"];
 
@@ -21,6 +21,20 @@ function safeStr(val: string | undefined): string {
 /**
  * Parsea el contenido de un CSV (texto completo) a registros SNV.
  */
+/**
+ * Aplica los modelos de herencia a los registros SNV.
+ * inheritanceData es un objeto { rsID: "aditivo"|"dominante"|"recesivo" }
+ */
+export function applyInheritanceModels(
+  records: SNVRecord[],
+  inheritanceData: Record<string, string>
+): SNVRecord[] {
+  return records.map(r => ({
+    ...r,
+    inheritanceModel: (inheritanceData[r.rsID] as InheritanceModel) || "aditivo",
+  }));
+}
+
 export function parseSNVcsv(csvText: string): SNVRecord[] {
   // Detectar y remover BOM si existe
   const text = csvText.replace(/^\uFEFF/, "");
@@ -83,6 +97,7 @@ export function parseSNVcsv(csvText: string): SNVRecord[] {
       hweAA,
       hweAa,
       hweaa,
+      inheritanceModel: "aditivo" as InheritanceModel, // default, overridden by applyInheritanceModels
       oddsRatio: safeStr(get("OddsRatio")),
       ci95: safeStr(get("CI95")),
       pubmedID: safeStr(get("PubMedID")),
