@@ -11,6 +11,7 @@ import {
   type ModuleResult,
 } from "@/lib/indice-alelo/engine";
 import { parseSNVcsv, parseReadingsCSV, applyInheritanceModels } from "@/lib/indice-alelo/csv-parser";
+import ModelDocumentation from "./ModelDocumentation";
 
 // ─── Tipos UI ────────────────────────────────────────────────────────
 
@@ -43,7 +44,7 @@ export default function ClinicaApp() {
   // Estado por módulo
   const [moduleStates, setModuleStates] = useState<Record<number, ModuleState>>({});
   const [activeModule, setActiveModule] = useState<number | null>(null);
-  const [view, setView] = useState<"modules" | "results">("modules");
+  const [view, setView] = useState<"modules" | "results" | "docs">("modules");
 
   // Ref para input de archivo
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -368,6 +369,14 @@ export default function ClinicaApp() {
             >
               Resultados del paciente
             </button>
+            <button
+              onClick={() => { setActiveModule(null); setView("docs"); }}
+              className={`w-full text-left px-3 py-2 rounded-lg text-xs transition ${
+                view === "docs" ? "bg-purple-500/20 text-purple-300" : "text-gray-400 hover:bg-white/5"
+              }`}
+            >
+              Modelo matemático
+            </button>
           </div>
 
           <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-2 px-3">Módulos</p>
@@ -423,7 +432,9 @@ export default function ClinicaApp() {
 
         {/* ─── Panel principal ─────────────────────────────────── */}
         <main className="flex-1 p-6 min-h-[calc(100vh-80px)] overflow-auto">
-          {view === "results" ? (
+          {view === "docs" ? (
+            <ModelDocumentation />
+          ) : view === "results" ? (
             <ResultsView moduleStates={moduleStates} nombre={nombre} codigo={codigo} />
           ) : activeModule ? (
             <ModuleView
