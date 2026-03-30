@@ -12,6 +12,7 @@ import {
 } from "@/lib/indice-alelo/engine";
 import { parseSNVcsv, parseReadingsCSV, applyInheritanceModels } from "@/lib/indice-alelo/csv-parser";
 import ModelDocumentation from "./ModelDocumentation";
+import RadarChart from "@/components/ui/RadarChart";
 
 // ─── Tipos UI ────────────────────────────────────────────────────────
 
@@ -731,6 +732,8 @@ function ModuleView({ modNum, snvs, state, poblacion, onUpdateReading, onCalcula
   );
 }
 
+const MODULE_SHORT = ["", "Peso", "Diabetes", "Ejercicio", "Cardio", "Nutri", "Fármaco", "Bienestar"];
+
 function ResultsView({ moduleStates, nombre, codigo }: {
   moduleStates: Record<number, ModuleState>;
   nombre: string;
@@ -748,6 +751,12 @@ function ResultsView({ moduleStates, nombre, codigo }: {
     );
   }
 
+  const radarData = calculated.map(r => ({
+    label: MODULOS[r.modNum],
+    shortLabel: MODULE_SHORT[r.modNum] || `M${r.modNum}`,
+    value: r.indice,
+  }));
+
   return (
     <div>
       <h2 className="text-xl font-bold mb-1">
@@ -756,31 +765,40 @@ function ResultsView({ moduleStates, nombre, codigo }: {
       </h2>
       <p className="text-sm text-gray-400 mb-6">{calculated.length} módulos calculados</p>
 
-      {/* Gráfico de barras horizontal */}
-      <div className="space-y-3 mb-8">
-        {calculated.map(r => (
-          <div key={r.modNum} className="flex items-center gap-4">
-            <span className="text-xs text-gray-400 w-48 text-right flex-shrink-0 truncate">
-              {MODULOS[r.modNum]}
-            </span>
-            <div className="flex-1 h-6 rounded-full bg-white/5 overflow-hidden relative">
-              <div
-                className="h-full rounded-full transition-all duration-700"
-                style={{
-                  width: `${Math.min(100, r.indice)}%`,
-                  background: r.indice > 60
-                    ? "linear-gradient(90deg, #f59e0b, #ef4444)"
-                    : r.indice > 30
-                    ? "linear-gradient(90deg, #a855f7, #f59e0b)"
-                    : "linear-gradient(90deg, #10b981, #a855f7)",
-                }}
-              />
+      {/* Radar + barras */}
+      <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        {/* Radar chart */}
+        <div className="flex flex-col items-center justify-center p-4 rounded-xl bg-white/[0.02] border border-white/5">
+          <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-2">Perfil genómico</p>
+          <RadarChart data={radarData} size={320} />
+        </div>
+
+        {/* Barras horizontales */}
+        <div className="space-y-3 flex flex-col justify-center">
+          {calculated.map(r => (
+            <div key={r.modNum} className="flex items-center gap-3">
+              <span className="text-xs text-gray-400 w-24 text-right flex-shrink-0 truncate">
+                {MODULE_SHORT[r.modNum]}
+              </span>
+              <div className="flex-1 h-7 rounded-lg bg-white/5 overflow-hidden relative">
+                <div
+                  className="h-full rounded-lg transition-all duration-700"
+                  style={{
+                    width: `${Math.min(100, r.indice)}%`,
+                    background: r.indice > 60
+                      ? "linear-gradient(90deg, #f59e0b, #ef4444)"
+                      : r.indice > 30
+                      ? "linear-gradient(90deg, #a855f7, #f59e0b)"
+                      : "linear-gradient(90deg, #10b981, #a855f7)",
+                  }}
+                />
               <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-mono text-white/70">
                 {r.indice.toFixed(1)}
               </span>
             </div>
           </div>
         ))}
+        </div>
       </div>
 
       {/* Tabla resumen */}

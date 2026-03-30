@@ -12,14 +12,16 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl gradient-alelo flex items-center justify-center shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-shadow">
-            <span className="text-white font-bold text-lg">A</span>
-          </div>
+          {/* Isotipo Alelo — Manual de Identidad 2024 */}
+          <svg width="36" height="36" viewBox="0 0 120 120" className="text-[#8b2fa0] group-hover:text-[#a855f7] transition-colors">
+            <path d="M10 30 L10 110 L70 110 L70 70 L110 70 L110 10 L50 10 L50 30 Z" fill="currentColor"/>
+            <rect x="30" y="30" width="30" height="30" fill="white"/>
+          </svg>
           <div>
-            <span className="text-xl font-semibold text-gray-900 tracking-tight">
-              Clínica Alelo
+            <span className="text-xl font-semibold text-gray-900 tracking-tight" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
+              alelo
             </span>
-            <span className="hidden sm:block text-xs text-purple-500/70 -mt-0.5">
+            <span className="hidden sm:block text-[10px] text-gray-400 tracking-wider uppercase -mt-0.5">
               Medicina Genómica Preventiva
             </span>
           </div>

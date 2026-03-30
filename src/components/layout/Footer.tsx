@@ -49,10 +49,11 @@ export default function Footer() {
         {/* Marca */}
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-lg gradient-alelo flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
-            <span className="text-white font-semibold">Clínica Alelo</span>
+            <svg width="28" height="28" viewBox="0 0 120 120" className="text-[#a855f7]">
+              <path d="M10 30 L10 110 L70 110 L70 70 L110 70 L110 10 L50 10 L50 30 Z" fill="currentColor"/>
+              <rect x="30" y="30" width="30" height="30" fill="#0a0a12"/>
+            </svg>
+            <span className="text-white font-semibold" style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>alelo</span>
           </div>
           <p className="text-sm text-gray-400 leading-relaxed">
             Medicina genómica preventiva para la población mexicana.

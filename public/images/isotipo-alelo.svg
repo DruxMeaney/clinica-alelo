@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Isotipo Alelo — basado en Manual de Identidad Gráfica 2024 -->
+  <!-- Forma geométrica "a" con cuadrado interior rotado -->
+  <path d="M10 30 L10 110 L70 110 L70 70 L110 70 L110 10 L50 10 L50 30 Z" fill="currentColor"/>
+  <!-- Cuadrado interior (ventana) -->
+  <rect x="30" y="30" width="30" height="30" rx="0" fill="white" transform="rotate(0 45 45)"/>
+</svg>
