@@ -29,37 +29,15 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-1">
-          {MAIN_NAV.map((item) =>
-            item.children ? (
-              <div key={item.label} className="relative group">
-                <button className="px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0] transition-colors rounded-md">
-                  {item.label}
-                  <svg className="inline-block ml-1 w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white/95 backdrop-blur-xl rounded-xl shadow-xl shadow-purple-500/10 border border-purple-100/50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-purple-50 hover:text-[#8b2fa0] first:rounded-t-xl last:rounded-b-xl transition-colors"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0] transition-colors rounded-md"
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          {MAIN_NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0] transition-colors rounded-md"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
 
         {/* CTA + Mobile toggle */}
@@ -89,34 +67,16 @@ export default function Header() {
       {/* Mobile Nav */}
       {mobileOpen && (
         <nav className="lg:hidden border-t border-purple-100/50 bg-white/95 backdrop-blur-xl px-6 py-4 space-y-1">
-          {MAIN_NAV.map((item) =>
-            item.children ? (
-              <div key={item.label}>
-                <span className="block px-3 py-2 text-xs font-semibold text-purple-400 uppercase tracking-wider">
-                  {item.label}
-                </span>
-                {item.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    className="block px-6 py-2 text-sm text-gray-600 hover:text-[#8b2fa0]"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="block px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0]"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
+          {MAIN_NAV.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="block px-3 py-2 text-sm text-gray-600 hover:text-[#8b2fa0]"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
       )}
     </header>

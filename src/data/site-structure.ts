@@ -42,17 +42,7 @@ export const MAIN_NAV = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Servicios", href: "/servicios" },
-  {
-    label: "Ciencia",
-    href: "#",
-    children: [
-      { label: "Índice Alelo", href: "/indice-alelo" },
-      { label: "Investigación", href: "/investigacion" },
-      { label: "Genómica poblacional", href: "/genomica-poblacional" },
-      { label: "Tecnología", href: "/tecnologia" },
-      { label: "Ancestría", href: "/ancestria" },
-    ],
-  },
+  { label: "Ciencia", href: "/ciencia" },
   { label: "Equipo", href: "/equipo" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
   { label: "Área clínica", href: "/clinica" },
