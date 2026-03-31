@@ -41,7 +41,6 @@ export const SITE_METADATA = {
 export const MAIN_NAV = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Servicios", href: "/servicios" },
   { label: "Ciencia", href: "/ciencia" },
   { label: "Vías metabólicas", href: "/vias-metabolicas" },
   { label: "Equipo", href: "/equipo" },

@@ -3,7 +3,7 @@ import Link from "next/link";
 const footerNav = {
   clinica: [
     { label: "Nosotros", href: "/nosotros" },
-    { label: "Servicios", href: "/servicios" },
+    { label: "Servicios", href: "/nosotros#servicios" },
     { label: "Proceso clínico", href: "/proceso-clinico" },
     { label: "Equipo", href: "/equipo" },
     { label: "Contacto", href: "/contacto" },
