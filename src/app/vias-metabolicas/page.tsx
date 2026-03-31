@@ -218,6 +218,10 @@ export default function ViasMetabolicasPage() {
             </div>
           </div>
 
+          <p className="text-xs text-gray-400 mb-5 leading-relaxed max-w-2xl p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <strong className="text-gray-600 block mb-1">Cómo leer este diagrama</strong>
+            El fármaco entra por la izquierda. Los bloques superiores (<strong>Fase I</strong>) son las enzimas CYP450 que lo oxidan o reducen para hacerlo más reactivo; los bloques inferiores (<strong>Fase II</strong>) lo conjugan con moléculas hidrosolubles para que pueda excretarse. La columna derecha muestra los <strong>transportadores</strong> que controlan la entrada y salida del fármaco en la célula hepática o intestinal. El producto final —metabolito activo, inactivo o listo para excreción— sale por la derecha hacia su diana o hacia la orina/bilis. Cada gen tiene un color según su categoría funcional. Haz clic en cualquier gen para ver qué fármacos afecta, qué variantes analiza Alelo y cuál es la consecuencia clínica de cada fenotipo metabolizador.
+          </p>
           <CYP450Pathway />
         </section>
 
@@ -283,6 +287,10 @@ export default function ViasMetabolicasPage() {
             </div>
           </div>
 
+          <p className="text-xs text-gray-400 mb-5 leading-relaxed max-w-2xl p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <strong className="text-gray-600 block mb-1">Cómo leer este diagrama</strong>
+            El circuito lipídico conecta tres órganos principales: el <strong>intestino</strong> (absorbe colesterol y grasas de la dieta como quilomicrones), el <strong>hígado</strong> (sintetiza VLDL y LDL, y capta LDL-C del plasma), y los <strong>tejidos periféricos</strong> (usan y almacenan lípidos). Las flechas sólidas son flujos directos; las punteadas son flujos reversos o indirectos. Los genes del panel actúan como reguladores en nodos críticos: <strong>PCSK9</strong> degrada el receptor LDL del hígado, reduciendo cuánto LDL-C se elimina del plasma; <strong>APOE</strong> determina cómo se ensamblan y reconocen las lipoproteínas; <strong>SLC16A11</strong> altera el metabolismo de lípidos intracelulares en el hígado. Haz clic en cada gen para ver su variante clave y su impacto clínico.
+          </p>
           <LipidPathway />
         </section>
 
@@ -353,6 +361,10 @@ export default function ViasMetabolicasPage() {
             </div>
           </div>
 
+          <p className="text-xs text-gray-400 mb-5 leading-relaxed max-w-2xl p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <strong className="text-gray-600 block mb-1">Cómo leer este diagrama</strong>
+            El ciclo del folato gira entre dos funciones celulares críticas. En la <strong>parte superior</strong>, la síntesis de timidilato y purinas que el ADN necesita para replicarse. En la <strong>parte inferior</strong>, la generación de SAM (S-adenosilmetionina), el donador universal de grupos metilo que activa más de 200 reacciones epigenéticas y de neurotransmisores. La enzima <strong>MTHFR</strong> —el nodo central, resaltado en ámbar cuando porta la variante C677T— es el cuello de botella del ciclo: si trabaja a menor capacidad, el grupo metilo no llega a reconvertir la homocisteína en metionina, y ésta se acumula dañando el endotelio vascular. Los nodos hexagonales son metabolitos; los cuadrados son enzimas o cofactores. Haz clic en cada nodo para ver su función, el gen asociado y las implicaciones clínicas de sus variantes.
+          </p>
           <FolateCycle />
         </section>
 
@@ -380,10 +392,14 @@ export default function ViasMetabolicasPage() {
               la homocisteína elevada por MTHFR daña el mismo endotelio que PCSK9 y APOE comprometen por otras vías.
             </p>
             <p>
-              Haz clic en cada punto de intersección del diagrama para explorar la evidencia clínica de cada convergencia.
+              El diagrama triangular muestra los tres sistemas como vértices. Los puntos intermedios en cada arista son las intersecciones: lugares donde dos sistemas comparten genes, sustratos o consecuencias clínicas. Haz clic en cada punto de intersección para explorar la evidencia clínica de cada convergencia.
             </p>
           </div>
 
+          <p className="text-xs text-gray-400 mb-5 leading-relaxed max-w-2xl p-4 rounded-xl bg-gray-50 border border-gray-100">
+            <strong className="text-gray-600 block mb-1">Cómo leer este diagrama</strong>
+            Cada vértice del triángulo representa uno de los tres sistemas del panel. Las aristas no son solo líneas: cada una contiene un <strong>punto de intersección clicable</strong> que representa una convergencia biológica real entre los dos sistemas que conecta. Por ejemplo, la arista entre CYP450 y Metabolismo lipídico contiene el gen <strong>SLCO1B1</strong>: un transportador que lleva las estatinas al hígado para que CYP3A4 las metabolice — cuando este gen falla, las estatinas se acumulan en músculo y producen miopatía. Las líneas sólidas de color indican la intersección activa; las grises, las inactivas. Haz clic en cada punto para ver los genes involucrados, la evidencia clínica y la implicación terapéutica.
+          </p>
           <PathwayIntersectionMap />
         </section>
 
@@ -393,7 +409,7 @@ export default function ViasMetabolicasPage() {
             <div className="flex-shrink-0 w-11 h-11 rounded-full bg-purple-50 flex items-center justify-center text-[#8b2fa0] font-bold text-sm border border-purple-100">4</div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900">Matriz de evidencia genómica</h2>
-              <p className="text-gray-500 mt-1 text-sm">Genes del panel Alelo con niveles de evidencia CPIC y PharmGKB — ordenados por vía y módulo</p>
+              <p className="text-gray-500 mt-1 text-sm">Cada fila es un gen del panel con su nivel de evidencia científica. <strong>CPIC</strong> clasifica qué tan sólida es la recomendación de ajuste de dosis o selección de fármaco: nivel A = evidencia alta, recomendación fuerte. <strong>PharmGKB</strong> clasifica la fuerza de la asociación gen-fármaco-fenotipo: 1A = evidencia máxima, estudiada en múltiples cohortes. Juntos definen si una variante ya tiene implicación terapéutica directa o si está en etapa de asociación sin guía clínica aún.</p>
             </div>
           </div>
 

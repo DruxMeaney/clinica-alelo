@@ -180,15 +180,18 @@ export default function CienciaPage() {
           <h3 className="text-lg font-semibold text-white mb-2">
             Asociaciones GWAS — panel Alelo
           </h3>
+          <p className="text-sm text-gray-500 mb-2">
+            Cada barra horizontal representa una variante del panel y qué tan fuerte es su asociación estadística con una condición de salud. El eje mide el <strong className="text-gray-400">-log₁₀ del valor p</strong>: a mayor longitud de la barra, más robusta es la evidencia.
+            En términos concretos, una barra de longitud 8 equivale a un p-valor de 10⁻⁸, lo que significa que la probabilidad de encontrar esa asociación por azar es 1 en 100 millones.
+          </p>
           <p className="text-sm text-gray-500 mb-6">
-            Magnitud de asociación (-log₁₀ p) para variantes clave del panel. Datos del GWAS Catalog (NHGRI-EBI), descargados vía SNPnexus.
-            La línea vertical indica el umbral de significancia genómica estándar (p = 5×10⁻⁸).
+            La <span className="text-yellow-400 font-medium">línea punteada amarilla</span> marca el umbral de significancia genómica estándar (p = 5×10⁻⁸), el criterio internacional para considerar un hallazgo genuino en estudios con cientos de miles de personas. <strong className="text-gray-400">Todas las variantes del panel lo superan ampliamente.</strong> Los genes TCF7L2 y PCSK9 presentan asociaciones tan extremas que la barra se trunca; el valor real aparece anotado al final. Haz clic en cualquier gen para ver su descripción clínica, la fuente del estudio y el contexto de la asociación.
           </p>
           <GWASChart />
 
           <p className="text-xs text-gray-600 mt-4">
             Fuentes: GWAS Catalog (NHGRI-EBI; Sollis et al. 2023) · SIGMA 2014 (Nature 506:97) · Descargados vía SNPnexus (Oscanoa et al. 2020).
-            Valores extremos (PCSK9 p≈3×10⁻²⁵⁷, TCF7L2 p≈2×10⁻¹⁷⁶) se muestran truncados con marcador ▶▶.
+            Los valores extremos (PCSK9 p≈3×10⁻²⁵⁷, TCF7L2 p≈2×10⁻¹⁷⁶) provienen de estudios de cohorte con &gt;1 millón de individuos y se visualizan truncados en 80 con marcador ▶▶.
           </p>
         </div>
       </section>
@@ -258,9 +261,11 @@ export default function CienciaPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-gray-400 mt-3">
-            P/LP = Patogénico / Probablemente patogénico · VUS = Variante de significado incierto · B = Benigno.
-            Fuentes: ClinVar (NCBI), PolyPhen-2 (Harvard), SIFT (JCVI). Haz clic en una fila para resaltarla.
+          <p className="text-xs text-gray-400 mt-3 leading-relaxed">
+            <strong className="text-gray-500">PolyPhen-2</strong> predice si el cambio de aminoácido daña la estructura tridimensional de la proteína comparando con homólogos evolutivos.
+            <strong className="text-gray-500"> SIFT</strong> evalúa si ese cambio es tolerable según la conservación evolutiva de la posición.
+            <strong className="text-gray-500"> ClinVar</strong> clasifica la variante según la evidencia clínica acumulada: <strong>P/LP</strong> = Patogénica/Probablemente patogénica · <strong>VUS</strong> = Variante de significado incierto · <strong>B</strong> = Benigna.
+            Una variante puede aparecer «Benigna» en PolyPhen-2/SIFT y aun así tener fuerte asociación GWAS: muchas variantes actúan mediante regulación de la expresión génica, no cambiando la secuencia de la proteína. Esta tabla distingue ambos tipos de impacto. Haz clic en una fila para resaltarla. Fuentes: ClinVar (NCBI), PolyPhen-2 (Harvard), SIFT (JCVI).
           </p>
         </div>
       </section>
@@ -321,9 +326,11 @@ export default function CienciaPage() {
           <h3 className="text-lg font-semibold text-gray-900 mb-3">
             Frecuencias comparadas en 4 poblaciones globales
           </h3>
-          <p className="text-sm text-gray-500 mb-4 max-w-2xl">
-            Variantes clave del panel con frecuencia del alelo de riesgo por población.
-            Datos: gnomAD v4 + SIGMA 2014. Haz clic en cada variante para ver detalles.
+          <p className="text-sm text-gray-500 mb-2 max-w-2xl">
+            Cada barra muestra qué porcentaje de personas en un grupo de ancestría porta el alelo de riesgo para una variante dada. Cuanto mayor sea esta cifra, más frecuente es el riesgo genético en esa población y más relevante resulta incluir esa variante en el panel clínico.
+          </p>
+          <p className="text-sm text-gray-500 mb-5 max-w-2xl">
+            Las diferencias entre grupos pueden ser dramáticas: el haplotipo de <strong>SLC16A11</strong> está presente en ~30% de mestizos mexicanos pero en menos del 2% de europeos, lo que lo hace prácticamente invisible para herramientas calibradas con datos euro-centrados. Las cuatro columnas de color representan ancestría africana, amerindia, del este asiático y europea; la barra gris central es la frecuencia global de gnomAD. Haz clic en cada variante para ver su descripción clínica detallada.
           </p>
           <PopulationFrequencyChart />
         </div>
@@ -360,9 +367,11 @@ export default function CienciaPage() {
           <h3 className="text-lg font-semibold text-white mb-2">
             Enriquecimiento en rutas metabólicas — Reactome
           </h3>
+          <p className="text-sm text-gray-500 mb-2">
+            Esta gráfica responde una pregunta concreta: <em>¿los 94 genes del panel se concentran en ciertas rutas biológicas más de lo que esperaríamos por azar?</em> Cada barra horizontal es una ruta metabólica de Reactome; su longitud indica qué tan significativa es esa concentración, medida con la prueba exacta de Fisher.
+          </p>
           <p className="text-sm text-gray-500 mb-6">
-            Análisis de enriquecimiento de Fisher para las 94 variantes del panel contra la base de datos Reactome.
-            Datos del archivo pathway_SNV1.txt. Línea vertical: umbral p=0.05 (-log₁₀=1.30).
+            Barras más largas significan que el panel tiene una coherencia biológica no aleatoria en esa ruta. La <span className="text-white/60 font-medium">línea punteada</span> marca el umbral de significancia estadística (p = 0.05). Las rutas que lo superan —metabolismo lipídico, señalización de insulina, metabolismo de xenobióticos— son el fundamento biológico de los tres ejes clínicos de Alelo. Esta convergencia valida que el panel no es una lista arbitraria de variantes, sino un sistema con lógica biológica interna. Haz clic en cada ruta para ver qué genes del panel participan en ella y cómo se interpretan clínicamente.
           </p>
           <ReactomeEnrichment />
 
@@ -371,10 +380,11 @@ export default function CienciaPage() {
             <h3 className="text-lg font-semibold text-white mb-2">
               Red de convergencia genética
             </h3>
+            <p className="text-sm text-gray-500 mb-2 max-w-2xl">
+              Cada círculo es un gen del panel; cada línea indica que dos genes comparten al menos una ruta metabólica. El color del nodo identifica su clúster funcional: metabolismo lipídico, eje diabético, farmacogenética, sistema RAS, biología vascular, rendimiento muscular o ritmo circadiano.
+            </p>
             <p className="text-sm text-gray-500 mb-6 max-w-2xl">
-              Conectividad entre genes del panel por pertenencia a rutas metabólicas compartidas.
-              Los nodos centrales (PPARG, APOE, PPARGC1A) representan los mayores hubs de conectividad.
-              Fuentes: STRING-db, KEGG, Reactome, Gene Ontology.
+              Los nodos más grandes y mejor conectados —<strong className="text-white/70">PPARG</strong>, <strong className="text-white/70">APOE</strong>, <strong className="text-white/70">PPARGC1A</strong>— son genes <em>hub</em>: su variación genética tiene efectos más amplios porque intervienen en múltiples procesos simultáneamente. Esta estructura explica por qué el riesgo cardiometabólico no depende de un solo gen sino de la interacción de muchos, y por qué el Índice Alelo integra los resultados como sistema, no como suma de riesgos aislados. Fuentes: STRING-db, KEGG, Reactome, Gene Ontology.
             </p>
             <GeneNetwork className="max-w-4xl mx-auto" />
 
