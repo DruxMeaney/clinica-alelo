@@ -114,7 +114,7 @@ export default function ClinicaGateway() {
             </div>
 
             <button
-              onClick={() => setStage("login")}
+              onClick={() => setStage("app")}
               className="px-8 py-3 gradient-alelo text-white font-medium rounded-xl
                          hover:shadow-lg hover:shadow-purple-500/30 transition-all
                          hover:scale-[1.02] active:scale-[0.98]"
