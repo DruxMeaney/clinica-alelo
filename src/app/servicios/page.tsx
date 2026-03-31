@@ -6,8 +6,83 @@ import GlowOrbs from "@/components/ui/GlowOrbs";
 export const metadata: Metadata = {
   title: "Servicios clínicos y genómicos",
   description:
-    "Tres pilares: riesgo cardiovascular, nutrigenómica y genética de la respuesta al ejercicio.",
+    "Alelo-PGx, Alelo-Cardiometabólico, Alelo-Nutrigenómica y Alelo-Rendimiento Físico: cuatro servicios de medicina de precisión basados en tu perfil genético.",
 };
+
+const SERVICES = [
+  {
+    name: "Alelo–PGx",
+    label: "Farmacogenómica",
+    tier: "Nivel 1 — Acción terapéutica directa",
+    image: "/images/genomics-lab.jpg",
+    imageAlt: "Análisis farmacogenómico de precisión",
+    color: "#e11d73",
+    description:
+      "Recomendaciones de selección o ajuste de medicamentos basadas en el genotipo del paciente, conforme a guías CPIC (Clinical Pharmacogenetics Implementation Consortium). Traduce la información genética en acciones terapéuticas concretas.",
+    targets: [
+      "Pacientes con polifarmacia o tratamientos crónicos",
+      "Reacciones adversas previas a medicamentos",
+      "Falta de respuesta terapéutica documentada",
+      "Prescripciones con guías farmacogenómicas disponibles",
+    ],
+    output:
+      "Reporte genotipo/diplotipo → fenotipo → recomendación clínica, con versión de guías CPIC/ACMG utilizadas.",
+  },
+  {
+    name: "Alelo–Cardiometabólico",
+    label: "Riesgo cardiometabólico",
+    tier: "Nivel 2 — Prevención y estratificación de riesgo",
+    image: "/images/cardiovascular.jpg",
+    imageAlt: "Prevención cardiometabólica personalizada",
+    color: "#8b2fa0",
+    description:
+      "Perfil genético para la prevención y seguimiento cardiometabólico, integrado con datos clínicos y marcadores de laboratorio. Evalúa susceptibilidades a hipertensión, dislipidemias, diabetes tipo 2, obesidad y enfermedad cardiovascular.",
+    targets: [
+      "Adultos con antecedentes familiares de enfermedades cardiovasculares",
+      "Sobrepeso u obesidad con riesgo metabólico",
+      "Hipertensión, dislipidemias o alteraciones de glucosa",
+      "Interés en medicina preventiva personalizada",
+    ],
+    output:
+      "Índice Alelo + desglose por categoría + plan de prevención personalizado + metas de seguimiento.",
+  },
+  {
+    name: "Alelo–Nutrigenómica",
+    label: "Nutrigenómica",
+    tier: "Nivel 2 — Prevención y estratificación de riesgo",
+    image: "/images/nutrition.jpg",
+    imageAlt: "Nutrigenómica y alimentación personalizada",
+    color: "#7c3aed",
+    description:
+      "Perfil de variantes relacionadas con la respuesta a componentes dietarios, con plan de alimentación personalizado. Examina cómo los genes modulan la absorción, el metabolismo y los requerimientos individuales de nutrientes.",
+    targets: [
+      "Control de peso o composición corporal",
+      "Optimización de metabolismo y adherencia dietaria",
+      "Dislipidemia con componente nutricional",
+      "Riesgo cardiometabólico con intervención alimentaria",
+    ],
+    output:
+      "3–5 recomendaciones dietarias priorizadas con metas concretas (porciones/frecuencia) y seguimiento de marcadores clínicos.",
+  },
+  {
+    name: "Alelo–Rendimiento Físico",
+    label: "Genética del ejercicio",
+    tier: "Nivel 2 — Prevención y estratificación de riesgo",
+    image: "/images/exercise.jpg",
+    imageAlt: "Rendimiento físico y genética del ejercicio",
+    color: "#0284c7",
+    description:
+      "Perfil para entrenamiento, recuperación y adaptación al ejercicio, sin garantías de rendimiento. Analiza variantes vinculadas con composición muscular, capacidad aeróbica, respuesta al entrenamiento y recuperación.",
+    targets: [
+      "Personas físicamente activas o iniciando un programa de ejercicio",
+      "Deportistas recreativos que buscan optimizar su entrenamiento",
+      "Pacientes en rehabilitación física",
+      "Interés en prevención de lesiones y adherencia al ejercicio",
+    ],
+    output:
+      "Recomendaciones por dominio: entrenamiento, recuperación, prevención de lesiones y periodización básica. Indicadores de percepción de esfuerzo y consistencia.",
+  },
+];
 
 export default function ServiciosPage() {
   return (
@@ -22,184 +97,130 @@ export default function ServiciosPage() {
             Servicios clínicos y genómicos
           </h1>
           <p className="mt-4 text-lg text-gray-300 max-w-2xl">
-            Tres pilares de atención personalizada basados en tu perfil genético.
+            Cuatro servicios de medicina de precisión diseñados para traducir tu información
+            genética en estrategias de salud personalizadas.
           </p>
         </div>
       </section>
 
+      {/* Intro */}
+      <section className="py-12 bg-white border-b border-gray-100">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+              <p className="text-xs font-semibold text-[#8b2fa0] tracking-widest uppercase mb-2">Nivel 1</p>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Acción terapéutica directa</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Servicios con implicación farmacológica inmediata. Los hallazgos se traducen en
+                recomendaciones de ajuste o selección de medicamentos conforme a guías CPIC/ACMG.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-gray-50 border border-gray-100">
+              <p className="text-xs font-semibold text-[#7c3aed] tracking-widest uppercase mb-2">Nivel 2</p>
+              <h3 className="text-base font-semibold text-gray-900 mb-2">Prevención y estratificación de riesgo</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Servicios orientados a la prevención y el seguimiento. No son diagnósticos. Integran
+                el Índice Alelo con datos clínicos para construir planes preventivos individualizados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
       <section className="py-16 bg-[#fafafa]">
-        <div className="max-w-5xl mx-auto px-6 space-y-16">
-          {/* Pilar 1: Cardiovascular */}
-          <div className="grid md:grid-cols-5 gap-8 items-start">
-            <div className="md:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
-                <Image src="/images/cardiovascular.jpg" alt="Salud cardiovascular" width={400} height={250} className="w-full h-48 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="max-w-5xl mx-auto px-6 space-y-20">
+          {SERVICES.map((svc, i) => (
+            <div key={svc.name} className={`grid md:grid-cols-5 gap-10 items-start ${i % 2 === 1 ? "md:flex-row-reverse" : ""}`}>
+              {/* Left: visual + title */}
+              <div className="md:col-span-2 space-y-4">
+                <div className="relative rounded-2xl overflow-hidden shadow-lg shadow-purple-500/10">
+                  <Image
+                    src={svc.image}
+                    alt={svc.imageAlt}
+                    width={400}
+                    height={240}
+                    className="w-full h-44 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="absolute bottom-3 left-4">
+                    <span
+                      className="text-xs font-semibold text-white px-2 py-0.5 rounded-full"
+                      style={{ backgroundColor: `${svc.color}cc` }}
+                    >
+                      {svc.tier.split("—")[0].trim()}
+                    </span>
+                  </div>
+                </div>
+                <div style={{ borderLeft: `3px solid ${svc.color}` }} className="pl-4">
+                  <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-1">
+                    {svc.label}
+                  </p>
+                  <h2 className="text-2xl font-bold text-gray-900">{svc.name}</h2>
+                  <p className="text-xs text-gray-400 mt-1">{svc.tier}</p>
+                </div>
               </div>
-              <div className="w-14 h-1 rounded-full bg-[#8b2fa0] mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Riesgo cardiovascular
-              </h2>
-              <p className="text-sm text-gray-500">Pilar 1</p>
-            </div>
-            <div className="md:col-span-3 space-y-4">
-              <p className="text-gray-600 leading-relaxed">
-                Identificamos variantes genéticas (SNVs) asociadas a factores de riesgo cardiovascular,
-                con el fin de canalizar a los pacientes hacia especialistas (cardiólogos, internistas)
-                cuando sea pertinente. Evaluamos la predisposición genética a patologías como
-                hipertensión, dislipidemias y enfermedad coronaria.
-              </p>
-              <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                <h4 className="text-sm font-semibold text-gray-900 mb-2">Genes representativos</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>
-                    <strong>APOE</strong> &mdash; Variantes &epsilon;2, &epsilon;3 y &epsilon;4
-                    (rs429358, rs7412) asociadas con dislipidemias y riesgo coronario.
-                  </li>
-                  <li>
-                    <strong>ACE</strong> &mdash; Polimorfismo I/D (rs4646994) relacionado con presión
-                    arterial y función cardiovascular.
-                  </li>
-                  <li>
-                    <strong>PCSK9</strong> &mdash; Variante rs11591147 que influye sobre los niveles
-                    de LDL-colesterol y el riesgo de enfermedad coronaria.
-                  </li>
-                </ul>
-              </div>
-              <p className="text-sm text-gray-500">
-                Si se detectan riesgos elevados, se remite al paciente con especialistas
-                y se integran los hallazgos en el abordaje terapéutico.
-              </p>
-            </div>
-          </div>
 
-          <hr className="border-gray-100" />
+              {/* Right: content */}
+              <div className="md:col-span-3 space-y-5">
+                <p className="text-gray-600 leading-relaxed">{svc.description}</p>
 
-          {/* Pilar 2: Nutrigenómica */}
-          <div className="grid md:grid-cols-5 gap-8 items-start">
-            <div className="md:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
-                <Image src="/images/nutrition.jpg" alt="Nutrigenómica y alimentación" width={400} height={250} className="w-full h-48 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              </div>
-              <div className="w-14 h-1 rounded-full bg-[#8b5cf6] mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Nutrigenómica
-              </h2>
-              <p className="text-sm text-gray-500">Pilar 2</p>
-            </div>
-            <div className="md:col-span-3 space-y-4">
-              <p className="text-gray-600 leading-relaxed">
-                Evaluamos SNVs relacionados con la nutrigenómica para sugerir planes nutricionales
-                y suplementos específicos, en coordinación con profesionales en nutrición y farmacia.
-                La nutrigenómica examina cómo los genes modulan la respuesta a nutrientes específicos
-                o a distintos patrones dietarios, abriendo la posibilidad de desarrollar planes de
-                alimentación altamente personalizados.
-              </p>
-              <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                <h4 className="text-sm font-semibold text-gray-900 mb-2">Genes representativos</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>
-                    <strong>FTO</strong> &mdash; Variante rs9939609, fuertemente vinculada con
-                    mayor masa grasa y alteración en la regulación energética.
-                  </li>
-                  <li>
-                    <strong>MTHFR</strong> &mdash; Variantes C677T (rs1801133) y A1298C, relacionadas
-                    con la conversión de folato a sus formas activas y los niveles de homocisteína.
-                  </li>
-                </ul>
-              </div>
-              <p className="text-sm text-gray-500">
-                Estas variantes permiten personalizar la dieta y optimizar la suplementación,
-                contrarrestando alteraciones metabólicas y minimizando riesgos asociados a
-                deficiencias nutricionales.
-              </p>
-            </div>
-          </div>
+                <div className="p-4 rounded-xl bg-white border border-gray-100">
+                  <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3">
+                    Perfil del paciente objetivo
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {svc.targets.map((t, j) => (
+                      <li key={j} className="flex gap-2 text-sm text-gray-600">
+                        <span style={{ color: svc.color }} className="mt-0.5 flex-shrink-0">›</span>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-          <hr className="border-gray-100" />
-
-          {/* Pilar 3: Ejercicio */}
-          <div className="grid md:grid-cols-5 gap-8 items-start">
-            <div className="md:col-span-2">
-              <div className="relative rounded-2xl overflow-hidden mb-6 shadow-lg shadow-purple-500/10">
-                <Image src="/images/exercise.jpg" alt="Respuesta al ejercicio y rendimiento" width={400} height={250} className="w-full h-48 object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="p-4 rounded-xl bg-purple-50/40 border border-purple-100/60">
+                  <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
+                    Resultado clínico
+                  </h4>
+                  <p className="text-sm text-gray-600 leading-relaxed">{svc.output}</p>
+                </div>
               </div>
-              <div className="w-14 h-1 rounded-full bg-[#e11d73] mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Respuesta al ejercicio
-              </h2>
-              <p className="text-sm text-gray-500">Pilar 3</p>
             </div>
-            <div className="md:col-span-3 space-y-4">
-              <p className="text-gray-600 leading-relaxed">
-                Analizamos variantes de genes vinculados a la respuesta al ejercicio, facilitando
-                recomendaciones de entrenamiento y acondicionamiento físico individualizadas.
-                La genética de la actividad física profundiza en la influencia de variantes
-                genéticas sobre la capacidad aeróbica, la fuerza muscular y la resistencia.
-              </p>
-              <div className="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                <h4 className="text-sm font-semibold text-gray-900 mb-2">Genes representativos</h4>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>
-                    <strong>ACTN3</strong> &mdash; Variante R577X (rs1815739), determina la presencia
-                    de &alpha;-actinina-3 en fibras musculares de tipo rápido. Vinculada con
-                    diferencias en fuerza, potencia y capacidad de sprint.
-                  </li>
-                  <li>
-                    <strong>ACE</strong> &mdash; El polimorfismo I/D también influye en resistencia
-                    aeróbica e hipertrofia muscular, siendo clave en la planificación del entrenamiento.
-                  </li>
-                </ul>
-              </div>
-              <p className="text-sm text-gray-500">
-                Esta información ayuda a establecer rutinas de ejercicio personalizadas, orientadas
-                a maximizar beneficios y reducir el riesgo de sobreentrenamiento o lesiones.
-              </p>
-            </div>
-          </div>
+          ))}
 
-          {/* Servicios complementarios */}
-          <div className="p-8 rounded-2xl bg-gray-50 border border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Servicios complementarios</h2>
+          {/* Complementary services */}
+          <div className="p-8 rounded-2xl bg-white border border-gray-100">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Servicios complementarios</h2>
             <div className="grid sm:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">Suplementación específica</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Un equipo conjunto de farmacología y nutrición diseña planes de suplementación
-                  que compensen las carencias nutrimentales o fortalezcan rutas metabólicas
-                  detectadas en la secuenciación.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">Coordinación con especialistas</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Si los hallazgos requieren evaluación adicional, se refiere al paciente con
-                  cardiólogos, endocrinólogos u otros subespecialistas, compartiendo documentación
-                  genética y clínica para un seguimiento coordinado.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">Estudios de laboratorio complementarios</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  Se solicitan pruebas adicionales (química sanguínea, perfil de lípidos, marcadores
-                  vitamínicos) en laboratorios certificados para complementar la evaluación genética
-                  con una visión global del estado de salud.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-2">Medicina personalizada integral</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  La correlación entre datos genómicos, parámetros clínicos y estudios complementarios
-                  permite proponer cambios precisos en la dieta, el ejercicio y los estilos de vida,
-                  con seguimiento continuo y ajuste dinámico.
-                </p>
-              </div>
+              {[
+                {
+                  title: "Coordinación con especialistas",
+                  desc: "Si los hallazgos requieren evaluación adicional o sugieren enfermedad monogénica de alta penetrancia, se activa una ruta de referencia a genética clínica con clasificación de variantes conforme a criterios ACMG/AMP.",
+                },
+                {
+                  title: "Reporte para el paciente",
+                  desc: "Además del reporte clínico técnico, cada paciente recibe un reporte en lenguaje accesible que describe qué se analizó, qué se encontró (sin determinismo), qué hacer a continuación y cuándo regresar.",
+                },
+                {
+                  title: "Seguimiento clínico estructurado",
+                  desc: "Cada servicio incluye un esquema de seguimiento: desde 2–8 semanas (PGx) hasta 6–12 meses (cardiometabólico/nutrigenómica), con metas clínicas y ajuste dinámico del plan.",
+                },
+                {
+                  title: "Estudios de laboratorio complementarios",
+                  desc: "Se solicitan pruebas específicas (perfil lipídico, glucosa, HbA1c, tensión arterial, composición corporal) para integrar marcadores bioquímicos con el perfil genómico.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="space-y-1">
+                  <h3 className="text-sm font-semibold text-gray-900">{item.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
+          {/* CTA */}
+          <div className="pt-4 border-t border-gray-100 flex flex-wrap gap-4">
             <Link
               href="/contacto"
               className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
@@ -207,7 +228,7 @@ export default function ServiciosPage() {
               Agenda una consulta
             </Link>
             <Link
-              href="/indice-alelo"
+              href="/ciencia"
               className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#8b2fa0] hover:text-[#8b2fa0] transition-colors"
             >
               Conoce el Índice Alelo

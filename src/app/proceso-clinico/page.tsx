@@ -116,33 +116,67 @@ export default function ProcesoClinicoPage() {
             ))}
           </div>
 
-          {/* Estudios complementarios */}
+          {/* Reportes */}
           <div className="mt-16 p-8 rounded-2xl bg-gray-50 border border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Estudios complementarios
-            </h2>
-            <div className="space-y-4 text-sm text-gray-600">
-              <p>
-                Para reforzar la validez clínica de los resultados genéticos, se contemplan
-                pruebas diagnósticas y de laboratorio que completen la información obtenida
-                por secuenciación:
-              </p>
-              <ul className="space-y-2">
-                <li>
-                  <strong>Estudios de laboratorio:</strong> Química sanguínea, perfil de lípidos,
-                  marcadores vitamínicos y minerales, niveles hormonales o marcadores inflamatorios
-                  según los hallazgos genéticos.
-                </li>
-                <li>
-                  <strong>Evaluaciones clínicas especializadas:</strong> Cuando los hallazgos
-                  sugieren un riesgo elevado, se pueden recomendar estudios más profundos
-                  (imágenes diagnósticas, ergometrías, etc.).
-                </li>
-                <li>
-                  <strong>Referencia a especialistas:</strong> Se comparte documentación genética,
-                  hallazgos de laboratorio y notas clínicas para asegurar continuidad en la atención.
-                </li>
-              </ul>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Dos reportes por cada estudio</h2>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="p-5 rounded-xl bg-white border border-gray-100">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Reporte clínico</h3>
+                <ul className="space-y-1.5 text-sm text-gray-600">
+                  <li className="flex gap-2"><span className="text-[#8b2fa0]">›</span>Resumen ejecutivo: qué significa y qué hacer</li>
+                  <li className="flex gap-2"><span className="text-[#8b2fa0]">›</span>Índice Alelo o fenotipos farmacogenómicos con interpretación</li>
+                  <li className="flex gap-2"><span className="text-[#8b2fa0]">›</span>Detalle técnico mínimo: método, cobertura, limitaciones</li>
+                  <li className="flex gap-2"><span className="text-[#8b2fa0]">›</span>Guías y evidencias utilizadas (CPIC/ACMG) con versión y fecha</li>
+                  <li className="flex gap-2"><span className="text-[#8b2fa0]">›</span>Recomendaciones y seguimiento: acciones concretas</li>
+                </ul>
+              </div>
+              <div className="p-5 rounded-xl bg-white border border-gray-100">
+                <h3 className="text-sm font-semibold text-gray-900 mb-3">Reporte para el paciente</h3>
+                <ul className="space-y-1.5 text-sm text-gray-600">
+                  <li className="flex gap-2"><span className="text-[#7c3aed]">›</span>Qué analizó Alelo y cómo</li>
+                  <li className="flex gap-2"><span className="text-[#7c3aed]">›</span>Qué se encontró (sin determinismo)</li>
+                  <li className="flex gap-2"><span className="text-[#7c3aed]">›</span>Qué hacer a continuación</li>
+                  <li className="flex gap-2"><span className="text-[#7c3aed]">›</span>Cómo se protegen y resguardan los datos</li>
+                  <li className="flex gap-2"><span className="text-[#7c3aed]">›</span>Cuándo regresar y por qué</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Seguimiento */}
+          <div className="mt-8 p-8 rounded-2xl bg-purple-50/40 border border-purple-100/60">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Esquema de seguimiento por servicio</h2>
+            <div className="space-y-4">
+              {[
+                {
+                  service: "Alelo–PGx",
+                  steps: [
+                    "2–8 semanas después de un cambio farmacológico basado en el perfil",
+                    "Seguimiento anual: actualización de lista de medicamentos y revisión de nuevas guías CPIC",
+                    "Basado en eventos: cada vez que se agrega un fármaco con guías disponibles",
+                  ],
+                },
+                {
+                  service: "Alelo–Cardiometabólico / Nutrigenómica / Rendimiento",
+                  steps: [
+                    "Seguimiento 1 (4–8 semanas): adherencia y ajustes al plan",
+                    "Seguimiento 2 (3–4 meses): marcadores bioquímicos y metas intermedias",
+                    "Seguimiento 3 (6–12 meses): evaluación de impacto y re-estratificación clínica",
+                    "Seguimiento anual: revisión del plan, marcadores y actualización de evidencia",
+                  ],
+                },
+              ].map((item) => (
+                <div key={item.service} className="p-4 rounded-xl bg-white border border-gray-100">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-2">{item.service}</h4>
+                  <ul className="space-y-1">
+                    {item.steps.map((s, i) => (
+                      <li key={i} className="flex gap-2 text-sm text-gray-600">
+                        <span className="text-[#8b2fa0] flex-shrink-0">›</span>{s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </div>
 
