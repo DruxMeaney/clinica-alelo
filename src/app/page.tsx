@@ -50,10 +50,10 @@ export default function Home() {
                 Conoce nuestro enfoque
               </Link>
               <Link
-                href="/indice-alelo"
+                href="/ciencia"
                 className="px-8 py-4 border border-white/20 text-white font-medium rounded-xl hover:bg-white/5 hover:border-white/30 transition-all text-base"
               >
-                Descubre el Índice Alelo
+                Descubre la ciencia detrás
               </Link>
             </div>
             <p className="mt-10 text-sm text-gray-500">
