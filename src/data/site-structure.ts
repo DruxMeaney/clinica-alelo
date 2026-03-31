@@ -42,7 +42,6 @@ export const MAIN_NAV = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
   { label: "Ciencia", href: "/ciencia" },
-  { label: "Vías metabólicas", href: "/vias-metabolicas" },
   { label: "Equipo", href: "/equipo" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
   { label: "Área clínica", href: "/clinica" },
