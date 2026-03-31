@@ -109,10 +109,16 @@ export default function EticaPage() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-gray-100">
+          <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
+            <Link
+              href="/aviso-de-privacidad"
+              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
+            >
+              Aviso de privacidad
+            </Link>
             <Link
               href="/equipo"
-              className="px-6 py-3 bg-[#8b2fa0] text-white font-medium rounded-lg hover:bg-[#6b1d7b] transition-colors"
+              className="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-[#8b2fa0] hover:text-[#8b2fa0] transition-colors"
             >
               Conoce nuestro equipo
             </Link>

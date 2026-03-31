@@ -244,8 +244,8 @@ export default function Home() {
                 Clínica Alelo construye herramientas con mayor pertinencia biológica y clínica
                 para México.
               </p>
-              <Link href="/genomica-poblacional" className="text-sm font-medium text-[#8b2fa0] hover:underline">
-                Genómica poblacional &rarr;
+              <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
+                Ver Ciencia &rarr;
               </Link>
             </div>
             <div className="p-8 rounded-2xl bg-white/70 backdrop-blur-sm border border-purple-100/50">
@@ -260,8 +260,8 @@ export default function Home() {
                 Nuestro estudio piloto valida el modelo con vocación metodológica y estructura
                 científica.
               </p>
-              <Link href="/investigacion" className="text-sm font-medium text-[#8b2fa0] hover:underline">
-                Ver líneas de investigación &rarr;
+              <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
+                Investigación y ciencia &rarr;
               </Link>
             </div>
           </div>
