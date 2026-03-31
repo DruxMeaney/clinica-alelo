@@ -10,6 +10,7 @@ const footerNav = {
   ],
   ciencia: [
     { label: "Índice Alelo", href: "/indice-alelo" },
+    { label: "Vías metabólicas", href: "/vias-metabolicas" },
     { label: "Investigación", href: "/investigacion" },
     { label: "Genómica poblacional", href: "/genomica-poblacional" },
     { label: "Tecnología", href: "/tecnologia" },

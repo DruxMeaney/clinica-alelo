@@ -43,6 +43,7 @@ export const MAIN_NAV = [
   { label: "Nosotros", href: "/nosotros" },
   { label: "Servicios", href: "/servicios" },
   { label: "Ciencia", href: "/ciencia" },
+  { label: "Vías metabólicas", href: "/vias-metabolicas" },
   { label: "Equipo", href: "/equipo" },
   { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
   { label: "Área clínica", href: "/clinica" },
