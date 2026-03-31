@@ -181,13 +181,13 @@ export default function CienciaPage() {
             Asociaciones GWAS — panel Alelo
           </h3>
           <p className="text-sm text-gray-500 mb-6">
-            Magnitud de asociación (-log₁₀ p) para variantes clave del panel. Datos de GWAS Catalog + archivo gwas_SNV1.txt.
+            Magnitud de asociación (-log₁₀ p) para variantes clave del panel. Datos del GWAS Catalog (NHGRI-EBI), descargados vía SNPnexus.
             La línea vertical indica el umbral de significancia genómica estándar (p = 5×10⁻⁸).
           </p>
           <GWASChart />
 
           <p className="text-xs text-gray-600 mt-4">
-            Fuentes: GWAS Catalog (EMBL-EBI / NHGRI), SIGMA 2014, bases de datos propias analisisBD/.
+            Fuentes: GWAS Catalog (NHGRI-EBI; Sollis et al. 2023) · SIGMA 2014 (Nature 506:97) · Descargados vía SNPnexus (Oscanoa et al. 2020).
             Valores extremos (PCSK9 p≈3×10⁻²⁵⁷, TCF7L2 p≈2×10⁻¹⁷⁶) se muestran truncados con marcador ▶▶.
           </p>
         </div>

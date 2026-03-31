@@ -5,11 +5,11 @@ import { useState } from "react";
  * GWASChart — Lollipop chart of GWAS association strengths for panel SNPs
  *
  * Data sources:
- *   - gwas_SNV1.txt (analisisBD/Phenotype_DiseaseAssociation): confirmed p-values for
- *     rs1801133 (MTHFR), rs11591147 (PCSK9), rs7903146 (TCF7L2)
- *   - GWAS Catalog (NIH/EBI) & published meta-analyses: FTO, APOE, PPARG, LDLR, NOS3
- *   - SIGMA Consortium (2014): SLC16A11 T2D in Mexican/Indigenous populations
- *   - CPIC/PharmGKB: CYP2C19 pharmacogenomics
+ *   - GWAS Catalog (NHGRI-EBI; Sollis et al. 2023, Nucleic Acids Res. 51:D977–D985)
+ *     descargado vía SNPnexus (Oscanoa et al. 2020, Nucleic Acids Res. 48:W185–W192)
+ *     → archivo gwas_SNV1.txt
+ *   - SIGMA Type 2 Diabetes Consortium (2014): SLC16A11, Nature 506:97–101
+ *   - CPIC / PharmGKB: CYP2C19 pharmacogenomics
  *
  * All -log10(p) values >80 are displayed capped at 80 with actual value annotated.
  * Genome-wide significance threshold: p = 5×10⁻⁸ → -log10(p) = 7.3
@@ -37,7 +37,7 @@ const GWAS_DATA: GWASPoint[] = [
     category: "cardiovascular",
     actualNegLogP: 257, displayNegLogP: 78, capped: true,
     pValue: "3×10⁻²⁵⁷",
-    source: "gwas_SNV1.txt (analisisBD) — Graham et al. 2021; ukbiobank meta-analysis",
+    source: "GWAS Catalog (NHGRI-EBI) vía SNPnexus · Graham et al. 2021, Nat Genet (UK Biobank + meta-análisis lipídico)",
     description: "Variante de ganancia de función en PCSK9. Impacto sobre el receptor LDL con la asociación más fuerte del conjunto de datos. Efecto directo sobre LDL-C.",
   },
   {
@@ -47,7 +47,7 @@ const GWAS_DATA: GWASPoint[] = [
     category: "metabolic",
     actualNegLogP: 176, displayNegLogP: 76, capped: true,
     pValue: "2×10⁻¹⁷⁶",
-    source: "gwas_SNV1.txt (analisisBD) — Mahajan et al. 2022 (DIAMANTE meta-analysis, >1.4M individuos)",
+    source: "GWAS Catalog (NHGRI-EBI) vía SNPnexus · Mahajan et al. 2022, Nat Genet (DIAMANTE meta-análisis, >1.4M individuos)",
     description: "TCF7L2 es el locus genético de T2D más replicado a nivel mundial. La variante rs7903146 modula la señalización Wnt en células beta del páncreas.",
   },
   {
@@ -57,7 +57,7 @@ const GWAS_DATA: GWASPoint[] = [
     category: "metabolic",
     actualNegLogP: 104, displayNegLogP: 74, capped: true,
     pValue: "4×10⁻¹⁰⁴",
-    source: "gwas_SNV1.txt (analisisBD) — van Meurs et al. 2013 (meta-analysis ~68,000)",
+    source: "GWAS Catalog (NHGRI-EBI) vía SNPnexus · van Meurs et al. 2013 (meta-análisis ~68,000 individuos)",
     description: "C677T en MTHFR es la asociación genética más robusta con niveles de homocisteína. Frecuencia del alelo T en México ~47% (1KGen AMR), la más alta de cualquier continental population.",
   },
   {

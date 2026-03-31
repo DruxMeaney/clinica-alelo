@@ -159,7 +159,7 @@ export default function PopulationFrequencyChart() {
 
           {/* Source note */}
           <text x={LEFT} y={TOP - 4} fontSize="7.5" fill="#9ca3af" fontFamily="system-ui">
-            Fuente: gnomAD v4, SIGMA (2014), CPIC, literatura farmacogenómica publicada. Frecuencias del alelo de riesgo (%).
+            Fuentes: gnomAD v4 · 1000 Genomes · HapMap Ph.3 · SIGMA 2014 · CPIC — vía SNPnexus (Oscanoa et al. 2020). Frecuencias alelo de riesgo (%).
           </text>
 
           {/* X-axis grid lines and labels */}

@@ -318,8 +318,8 @@ export default function ReactomeEnrichment() {
               )}
               <div className="mt-3 p-2 rounded-lg bg-gray-50 border border-gray-100">
                 <p className="text-xs text-gray-400">
-                  Fuente: Reactome pathway_SNV1.txt (analisisBD)<br />
-                  Test: Fisher exacto contra base de datos Reactome v87
+                  Fuente: Reactome (Gillespie et al. 2022, Nucleic Acids Res. 50:D687) · pathway_SNV1.txt descargado vía SNPnexus (Oscanoa et al. 2020)<br />
+                  Test: Fisher exacto contra la base de datos Reactome
                 </p>
               </div>
             </div>
