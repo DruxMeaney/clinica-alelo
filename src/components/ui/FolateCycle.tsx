@@ -22,7 +22,7 @@ const CYCLE_NODES: CycleNode[] = [
     x: 330, y: 44, r: 28, color: "#84cc16",
     description: "Folato (vitamina B9) procedente de la dieta o suplementos. En vegetales verdes, legumbres, frutas cítricas. El ácido fólico (forma sintética) requiere conversión a THF antes de entrar al ciclo funcional.",
     clinical: "Deficiencia de folato causa anemia megaloblástica y aumenta el riesgo de defectos del tubo neural. La suplementación periconcepcional con ácido fólico reduce en >50% los defectos de tubo neural.",
-    mexicanData: "Los defectos de tubo neural tienen una incidencia particularmente alta en México (~7-14 por 10,000 nacidos vivos) — uno de los más altos de América Latina. La alta frecuencia de MTHFR C677T en México amplifica la importancia de una ingesta adecuada de folato.",
+    mexicanData: "Los defectos de tubo neural tienen actualmente una incidencia de ~3–4 por 10,000 nacidos vivos en México (datos post-fortificación 2005–2021); históricamente fue de 7–14 por 10,000 antes de la implementación de la fortificación obligatoria con ácido fólico. La alta frecuencia de MTHFR C677T en México amplifica la importancia de una ingesta adecuada de folato.",
   },
   {
     id: "dhf", label: "DHF", sublabel: "Dihidrofolato", type: "metabolite",

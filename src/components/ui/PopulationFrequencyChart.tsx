@@ -88,7 +88,7 @@ const VARIANTS: Variant[] = [
     variant: "ε4 rs429358",
     service: "Cardiometabólico",
     serviceColor: "#e11d73",
-    description: "El alelo ε4 de APOE eleva LDL ~10-20 mg/dL y es el factor genético de mayor impacto conocido para enfermedad de Alzheimer (RR ~3-4×). Mayor frecuencia en AFR, similar en AMR y NFE.",
+    description: "El alelo ε4 de APOE eleva LDL ~10-20 mg/dL y es el factor genético de mayor impacto conocido para enfermedad de Alzheimer (RR ~3× en heterocigotos ε3/ε4; ~15× en homocigotos ε4/ε4). Mayor frecuencia en AFR, similar en AMR y NFE.",
     amr: 14, nfe: 15, eas: 9, afr: 23,
     note: "Alelo ε4 (Cys112Arg)",
     source: "Corder et al. 1993; gnomAD v4",

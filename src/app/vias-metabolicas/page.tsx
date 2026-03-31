@@ -30,7 +30,7 @@ const DATABASES = [
   { name: "CPIC",         url: "https://cpicpgx.org",                  description: "Guías farmacogenómicas basadas en evidencia con recomendaciones de dosificación por genotipo.", badge: "Guías A-D",    color: "#16a34a" },
   { name: "PharmGKB",    url: "https://pharmgkb.org",                  description: "Base de datos curada de asociaciones gen-fármaco, rutas farmacogenómicas y literatura anotada.", badge: "Evidence 1A-4", color: "#7c3aed" },
   { name: "ClinVar",     url: "https://ncbi.nlm.nih.gov/clinvar",      description: "Variantes genéticas con significancia clínica documentada bajo el marco ACMG/AMP.",             badge: "ACMG/AMP",    color: "#0284c7" },
-  { name: "gnomAD v4",   url: "https://gnomad.broadinstitute.org",     description: "Frecuencias alélicas poblacionales en >730,000 exomas y genomas incluyendo Latino/AMR.",       badge: ">730k",       color: "#0891b2" },
+  { name: "gnomAD v4",   url: "https://gnomad.broadinstitute.org",     description: "Frecuencias alélicas poblacionales en >807,000 individuos (730,947 exomas + 76,215 genomas) incluyendo Latino/AMR.",       badge: ">807k",       color: "#0891b2" },
   { name: "PharmVar",    url: "https://pharmvar.org",                  description: "Nomenclatura oficial de alelos estrella (*1, *2…) para genes farmacogenómicos.",                badge: "Star alleles", color: "#e11d73" },
   { name: "OMIM",        url: "https://omim.org",                     description: "Catálogo de genes y fenotipos genéticos, incluyendo herencia monogénica relevante.",             badge: "Mendelian",   color: "#f59e0b" },
   { name: "Reactome",    url: "https://reactome.org",                 description: "Base de datos curada de rutas biológicas y reacciones moleculares. Fuente para enriquecimiento.", badge: "Pathways",    color: "#8b5cf6" },
@@ -248,7 +248,7 @@ export default function ViasMetabolicasPage() {
                 El hallazgo más relevante para México en esta vía es <strong>SLC16A11</strong>: un haplotipo de riesgo
                 para diabetes tipo 2 identificado por el Consorcio SIGMA en 2014, con frecuencia de ~29% en mestizos
                 y ~50% en poblaciones indígenas, frente a &lt;2% en europeos. SLC16A11 codifica un transportador
-                de piruvato mitocondrial cuya disfunción eleva diacilgliceroles hepáticos y promueve resistencia a la insulina.
+                de la familia MCT localizado en el retículo endoplásmico hepático, cuya disfunción eleva diacilgliceroles hepáticos y promueve resistencia a la insulina.
                 Este hallazgo es la demostración más contundente de por qué el panel necesita calibración local.
               </p>
             </div>
@@ -313,8 +313,10 @@ export default function ViasMetabolicasPage() {
                 <strong>MTHFR C677T</strong> (rs1801133) es la variante de mayor impacto en este ciclo. La sustitución
                 C→T genera una enzima termoestable con actividad reducida 35-70% en homocigotos (TT). México tiene
                 una de las prevalencias de TT más altas del mundo (~18-32% en mestizos, hasta ~40% en poblaciones
-                indígenas), lo que se asocia a la alta tasa de defectos de tubo neural —7-14 por 10,000 nacidos
-                vivos, de los más elevados de América Latina. La intervención nutricional de elección es el
+                indígenas), lo que históricamente se asoció a tasas de defectos de tubo neural de 7–14 por 10,000
+                nacidos vivos (antes de la fortificación obligatoria con ácido fólico); actualmente la tasa
+                post-fortificación es de ~3–4 por 10,000, aunque sigue siendo una de las más altas de la región.
+                La intervención nutricional de elección es el
                 L-metilfolato (5-MTHF) activo, que bypasea el bloqueo enzimático.
               </p>
             </div>
@@ -323,7 +325,7 @@ export default function ViasMetabolicasPage() {
                 { val: "~18-32%", desc: "de mexicanos con genotipo TT en MTHFR C677T", color: "#059669" },
                 { val: "~40%",    desc: "de TT en algunas poblaciones indígenas de México", color: "#047857" },
                 { val: ">200",    desc: "reacciones de metilación dependen de SAM como donador", color: "#059669" },
-                { val: "7-14/10k", desc: "nacidos vivos con defectos de tubo neural en México", color: "#dc2626" },
+                { val: "~3-4/10k", desc: "nacidos vivos con defectos de tubo neural en México (post-fortificación; cifra histórica pre-fortif.: 7–14)", color: "#dc2626" },
               ].map(({ val, desc, color }) => (
                 <div key={val} className="p-3.5 rounded-xl bg-white border border-gray-100 flex items-start gap-3">
                   <span className="text-xl font-bold shrink-0" style={{ color }}>{val}</span>
@@ -343,8 +345,9 @@ export default function ViasMetabolicasPage() {
                 Un paciente TT en MTHFR con niveles bajos de B12 y folato en dieta puede desarrollar
                 hiperhomocisteinemia, que daña el endotelio vascular independientemente del colesterol.
                 La suplementación con L-metilfolato 400-800 mcg/día + metilcobalamina puede reducir la
-                homocisteína hasta un 25-30%, con evidencia directa en reducción de riesgo cerebrovascular
-                y defectos de tubo neural en gestación.
+                homocisteína hasta un 25-30%, con evidencia de reducción del riesgo de defectos de tubo
+                neural en gestación y reducción modesta del riesgo de ictus (~10% en metaanálisis de
+                ensayos clínicos aleatorizados).
               </p>
             </div>
           </div>

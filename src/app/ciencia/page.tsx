@@ -14,8 +14,8 @@ import PathwayBridgePreview from "@/components/ui/PathwayBridgePreview";
 type FuncRow = { gene: string; variant: string; polyphen: string; sift: string; clinvar: string; note: string };
 
 const FUNCTIONAL_DATA: FuncRow[] = [
-  { gene: "PCSK9",    variant: "rs11591147",  polyphen: "Benigno",    sift: "Tolerado",  clinvar: "P/LP",      note: "LOF — reduce LDL 30–40%" },
-  { gene: "APOE",     variant: "rs429358",    polyphen: "Posiblemente dañino", sift: "Dañino", clinvar: "P/LP", note: "ε4 → riesgo CV y Alzheimer" },
+  { gene: "PCSK9",    variant: "rs11591147",  polyphen: "Benigno",    sift: "Tolerado",  clinvar: "P/LP",      note: "LOF (R46L) — reduce LDL ~10–15 mg/dL; variantes nonsense LOF reducen 30–40 mg/dL" },
+  { gene: "APOE",     variant: "rs429358",    polyphen: "Posiblemente dañino", sift: "Dañino", clinvar: "P/LP", note: "ε4 → riesgo CV y Alzheimer (RR ~3× en heterocigotos ε3/ε4; ~15× en homocigotos ε4/ε4)" },
   { gene: "MTHFR",    variant: "rs1801133",   polyphen: "Benigno",    sift: "Tolerado",  clinvar: "VUS/B",     note: "Reduce actividad enzimática 35–70%" },
   { gene: "TCF7L2",   variant: "rs7903146",   polyphen: "N/A (UTR)",  sift: "N/A",       clinvar: "P/LP",      note: "Mayor OR conocido para T2D: 1.4" },
   { gene: "SLC16A11", variant: "rs13342232",  polyphen: "Dañino",     sift: "Dañino",    clinvar: "P/LP",      note: "Haplotipo SIGMA, alto AMR" },
@@ -103,7 +103,7 @@ export default function CienciaPage() {
             <div className="lg:col-span-2 space-y-5 text-gray-600 leading-relaxed">
               <p>
                 En 2023, las enfermedades del corazón y la diabetes mellitus representaron el <strong className="text-gray-900">37%
-                de las defunciones</strong> registradas en México —más de 220,000 muertes anuales. La carga
+                de las defunciones</strong> registradas en México —más de 300,000 muertes anuales. La carga
                 cardiometabólica del país es una de las más altas del continente, y la brecha entre la
                 investigación genómica y la práctica clínica preventiva sigue siendo profunda.
               </p>
@@ -130,7 +130,7 @@ export default function CienciaPage() {
               {[
                 { val: "37%", desc: "de muertes en México por causas cardiometabólicas (2023)", color: "#e11d73" },
                 { val: "~30%", desc: "frecuencia del haplotipo SLC16A11 en mexicanos vs. <2% en europeos", color: "#8b2fa0" },
-                { val: ">95%", desc: "de GWAS publicados en cohortes europeas (diversidad insuficiente)", color: "#7c3aed" },
+                { val: "~80%", desc: "de muestras GWAS publicadas son de ascendencia europea (Sirugo et al., Cell 2019)", color: "#7c3aed" },
               ].map(({ val, desc, color }) => (
                 <div key={val} className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
                   <p className="text-3xl font-bold mb-1" style={{ color }}>{val}</p>
