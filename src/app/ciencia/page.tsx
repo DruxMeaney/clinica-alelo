@@ -8,6 +8,7 @@ import PopulationFrequencyChart from "@/components/ui/PopulationFrequencyChart";
 import ScienceNav from "@/components/ui/ScienceNav";
 import GWASChart from "@/components/ui/GWASChart";
 import ReactomeEnrichment from "@/components/ui/ReactomeEnrichment";
+import PathwayBridgePreview from "@/components/ui/PathwayBridgePreview";
 
 /* ─── Functional impact mini-chart (PolyPhen / SIFT / ClinVar) ─── */
 type FuncRow = { gene: string; variant: string; polyphen: string; sift: string; clinvar: string; note: string };
@@ -390,6 +391,60 @@ export default function CienciaPage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* ── Puente narrativo hacia Vías Metabólicas ─────────── */}
+          <div className="mt-20 pt-14 border-t border-white/[0.06]">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-5">
+              <span className="flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-[#8b2fa0] opacity-60"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8b2fa0]"></span>
+              </span>
+              <span className="text-xs font-semibold text-[#8b2fa0] tracking-widest uppercase">
+                Siguiente capa de análisis
+              </span>
+            </div>
+
+            {/* Bridge narrative */}
+            <div className="grid lg:grid-cols-2 gap-10 mb-12">
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold text-white leading-tight">
+                  De la red estadística al mecanismo molecular
+                </h3>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  El análisis de enriquecimiento en Reactome demuestra que los 94 genes del panel
+                  no son marcadores independientes: convergen en sistemas biológicos coherentes.
+                  Pero la convergencia estadística no explica el mecanismo. Para eso, es necesario
+                  descender un nivel y observar cómo funcionan —molecularmente— las vías donde
+                  estas variantes actúan.
+                </p>
+                <p className="text-gray-400 leading-relaxed text-sm">
+                  Tres circuitos concentran la mayor carga clínica del panel: el sistema enzimático
+                  <strong className="text-gray-200"> CYP450</strong> que determina cómo el organismo
+                  procesa fármacos, la<strong className="text-gray-200"> red lipoproteinaria</strong> que
+                  conecta genética con riesgo cardiovascular, y el
+                  <strong className="text-gray-200"> ciclo del folato</strong> que regula la metilación
+                  epigenética y la homocisteína. Estos tres sistemas no son silos: se intersectan
+                  en puntos con implicaciones clínicas directas.
+                </p>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { title: "¿Por qué tres vías?", body: "Porque el enriquecimiento Reactome señala que Metabolismo, Xenobióticos y Vitaminas son las rutas con mayor densidad de variantes. Estas tres categorías corresponden exactamente a farmacogenómica, riesgo lipídico-CV y nutrigenómica.", color: "#8b2fa0" },
+                  { title: "¿Qué aporta verlas molecularmente?", body: "La red estadística muestra qué genes están conectados. La vía molecular muestra cómo interactúan sus productos proteicos, qué sustratos transforman y dónde puede intervenir una recomendación clínica o nutricional.", color: "#e11d73" },
+                  { title: "¿Cómo se usa esta información en el modelo?", body: "Cada vía alimenta uno o más módulos del Índice Alelo. El análisis de vías permite asignar pesos clínicos (Wᵢ) con base en el rol funcional de cada variante, no solo en su magnitud estadística.", color: "#059669" },
+                ].map(({ title, body, color }) => (
+                  <div key={title} className="p-4 rounded-xl" style={{ background: `${color}0d`, borderLeft: `2px solid ${color}` }}>
+                    <p className="text-xs font-semibold text-white mb-1">{title}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* PathwayBridgePreview */}
+            <PathwayBridgePreview />
           </div>
         </div>
       </section>
