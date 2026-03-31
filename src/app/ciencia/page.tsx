@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import GlowOrbs from "@/components/ui/GlowOrbs";
 import GeneNetwork from "@/components/ui/GeneNetwork";
+import PopulationFrequencyChart from "@/components/ui/PopulationFrequencyChart";
 
 export const metadata: Metadata = {
   title: "Ciencia — Clínica Alelo",
@@ -281,14 +282,16 @@ export default function CienciaPage() {
             </p>
           </div>
 
-          {/* Flujo clínico */}
-          <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-            <Image src="/images/flujo-clinico.png" alt="Flujo de trabajo clínico de Clínica Alelo — desde recepción hasta seguimiento"
-              width={1200} height={600} className="w-full" />
-          </div>
-          <p className="text-xs text-gray-400 mt-3 text-center">
-            Flujo de trabajo clínico: 9 etapas desde la recepción hasta el seguimiento e investigación continua
+          {/* Frecuencias alélicas por población */}
+          <h3 className="text-lg font-semibold text-gray-900 mt-8 mb-3">
+            Frecuencias alélicas comparadas entre poblaciones
+          </h3>
+          <p className="text-sm text-gray-500 mb-4 max-w-2xl">
+            Variantes clave del panel Alelo con frecuencias del alelo de riesgo en cuatro poblaciones globales.
+            La columna Latino/Mexicano (AMR) muestra por qué herramientas calibradas para la
+            población mexicana son clínicamente necesarias. Haz clic en cada variante para más detalles.
           </p>
+          <PopulationFrequencyChart />
         </div>
       </section>
 
