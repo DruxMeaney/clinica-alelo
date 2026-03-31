@@ -6,6 +6,7 @@ import CYP450Pathway from "@/components/ui/CYP450Pathway";
 import LipidPathway from "@/components/ui/LipidPathway";
 import FolateCycle from "@/components/ui/FolateCycle";
 import PathwayIntersectionMap from "@/components/ui/PathwayIntersectionMap";
+import BibliographySection from "@/components/ui/BibliographySection";
 
 /* ─── Data: evidence genes ─────────────────────────────────────────────── */
 const EVIDENCE_GENES = [
@@ -490,6 +491,9 @@ export default function ViasMetabolicasPage() {
             </div>
           </div>
         </section>
+
+        {/* ══ REFERENCIAS ═══════════════════════════════════════════════ */}
+        <BibliographySection pageId="vias-metabolicas" />
 
         {/* ══ CTA FINAL ═════════════════════════════════════════════════ */}
         <section className="pt-8 border-t border-gray-100">

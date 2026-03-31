@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import GlowOrbs from "@/components/ui/GlowOrbs";
+import BibliographySection from "@/components/ui/BibliographySection";
 
 export const metadata: Metadata = {
   title: "Investigación",
@@ -145,6 +146,8 @@ export default function InvestigacionPage() {
               sino una propuesta con vocación metodológica, validación y estructura científica.
             </p>
           </div>
+
+          <BibliographySection pageId="investigacion" />
 
           <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-4">
             <Link

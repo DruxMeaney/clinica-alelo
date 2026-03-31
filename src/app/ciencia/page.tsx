@@ -9,6 +9,7 @@ import ScienceNav from "@/components/ui/ScienceNav";
 import GWASChart from "@/components/ui/GWASChart";
 import ReactomeEnrichment from "@/components/ui/ReactomeEnrichment";
 import PathwayBridgePreview from "@/components/ui/PathwayBridgePreview";
+import BibliographySection from "@/components/ui/BibliographySection";
 
 /* ─── Functional impact mini-chart (PolyPhen / SIFT / ClinVar) ─── */
 type FuncRow = { gene: string; variant: string; polyphen: string; sift: string; clinvar: string; note: string };
@@ -625,6 +626,13 @@ export default function CienciaPage() {
             informativos de ancestría (AIMs). Esta línea aportará calibración personalizada de frecuencias
             poblacionales para cada paciente, elevando la resolución del Índice Alelo.
           </div>
+        </div>
+      </section>
+
+      {/* ── Referencias bibliográficas ── */}
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <BibliographySection pageId="ciencia" />
         </div>
       </section>
 
