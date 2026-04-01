@@ -37,7 +37,7 @@ const GWAS_DATA: GWASPoint[] = [
     category: "cardiovascular",
     actualNegLogP: 257, displayNegLogP: 78, capped: true,
     pValue: "3×10⁻²⁵⁷",
-    source: "GWAS Catalog (NHGRI-EBI) vía SNPnexus · Graham et al. 2021, Nat Genet (UK Biobank + meta-análisis lipídico)",
+    source: "GWAS Catalog (NHGRI-EBI) vía SNPnexus · Graham SE et al. 2021, Nature 600:675 (GLGC, ~1.65M individuos)",
     description: "Variante de ganancia de función en PCSK9. Impacto sobre el receptor LDL con la asociación más fuerte del conjunto de datos. Efecto directo sobre LDL-C.",
   },
   {

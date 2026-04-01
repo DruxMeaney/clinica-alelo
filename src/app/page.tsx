@@ -4,6 +4,48 @@ import { CLINICAL_STEPS } from "@/data/clinical-flow";
 import DnaHelix from "@/components/ui/DnaHelix";
 import MolecularGrid from "@/components/ui/MolecularGrid";
 import GlowOrbs from "@/components/ui/GlowOrbs";
+import GeneClusterViz from "@/components/ui/GeneClusterViz";
+import PilarOrbitViz from "@/components/ui/PilarOrbitViz";
+import AleleScoreViz from "@/components/ui/AleleScoreViz";
+import ProcesoGenomicViz from "@/components/ui/ProcesoGenomicViz";
+import PopulationBubbleViz from "@/components/ui/PopulationBubbleViz";
+
+// ─── Data for Tres pilares (with genes for orbit viz) ─────────────────────────
+const PILARES = [
+  {
+    title: "Riesgo cardiometabólico",
+    desc:  "Evaluación de susceptibilidades genéticas asociadas a obesidad, diabetes tipo 2, hipertensión, dislipidemias y enfermedad cardiovascular.",
+    color: "#8b2fa0",
+    genes: [
+      { name: "PCSK9",   desc: "Regula el receptor LDL. Variante de pérdida de función confiere protección cardiovascular." },
+      { name: "TCF7L2",  desc: "Gen T2D más replicado globalmente. Señalización Wnt en célula β pancreática." },
+      { name: "APOE",    desc: "Metabolismo lipídico. Alelo ε4 modifica riesgo cardiovascular y de Alzheimer." },
+      { name: "FTO",     desc: "Masa grasa y obesidad. Locus GWAS de obesidad más replicado en estudios globales." },
+    ],
+  },
+  {
+    title: "Nutrigenómica",
+    desc:  "Análisis de variantes que influyen en la absorción, el metabolismo y los requerimientos individuales de nutrientes.",
+    color: "#7c3aed",
+    genes: [
+      { name: "MTHFR",  desc: "Metabolismo del folato. C677T reduce actividad enzimática ~70%." },
+      { name: "VDR",    desc: "Receptor de vitamina D. Variantes modulan absorción y activación." },
+      { name: "PPARG",  desc: "Receptor nuclear de ácidos grasos. Regula adipogénesis y sensibilidad a insulina." },
+      { name: "CYP1A2", desc: "Metabolismo de cafeína. Variante rs762551 determina velocidad de metabolización." },
+    ],
+  },
+  {
+    title: "Respuesta al ejercicio",
+    desc:  "Examen de variantes vinculadas con la composición muscular, la capacidad aeróbica y la respuesta al entrenamiento físico.",
+    color: "#e11d73",
+    genes: [
+      { name: "ACTN3",    desc: "α-Actinina-3 en fibras rápidas. R577X determina perfil de potencia vs. resistencia." },
+      { name: "ACE",      desc: "Enzima convertidora de angiotensina. Polimorfismo I/D modula respuesta aeróbica." },
+      { name: "PPARGC1A", desc: "Coactivador PGC-1α. Regula biogénesis mitocondrial y capacidad de resistencia." },
+      { name: "ADRB2",    desc: "Receptor β2-adrenérgico. Variantes modulan respuesta al entrenamiento físico." },
+    ],
+  },
+];
 
 export default function Home() {
   return (
@@ -67,11 +109,11 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          PROPUESTA DE VALOR — 3 columnas
+          PROPUESTA DE VALOR — ¿Por qué Clínica Alelo?
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#fafafa] relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               ¿Por qué Clínica Alelo?
             </h2>
@@ -80,6 +122,15 @@ export default function Home() {
               con herramientas diseñadas para la población mexicana.
             </p>
           </div>
+
+          {/* Interactive gene cluster visualization */}
+          <div className="mb-10 px-2">
+            <GeneClusterViz />
+            <p className="text-center text-xs text-gray-400 mt-2">
+              Genes del panel Alelo · Pasa el cursor sobre cada nodo para ver más información
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
@@ -109,7 +160,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          TRES PILARES — con acento visual
+          TRES PILARES — con visualización orbital por pilar
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 gradient-alelo-soft relative">
         <div className="absolute inset-0 molecular-grid" />
@@ -124,14 +175,14 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: "Riesgo cardiometabólico", desc: "Evaluación de susceptibilidades genéticas asociadas a obesidad, diabetes tipo 2, hipertensión, dislipidemias y enfermedad cardiovascular.", color: "#8b2fa0" },
-              { title: "Nutrigenómica", desc: "Análisis de variantes que influyen en la absorción, el metabolismo y los requerimientos individuales de nutrientes.", color: "#7c3aed" },
-              { title: "Respuesta al ejercicio", desc: "Examen de variantes vinculadas con la composición muscular, la capacidad aeróbica y la respuesta al entrenamiento físico.", color: "#e11d73" },
-            ].map((pilar) => (
-              <div key={pilar.title} className="p-8 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/50 card-hover">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-6" style={{ background: `${pilar.color}15` }}>
-                  <div className="w-3 h-3 rounded-full" style={{ background: pilar.color }} />
+            {PILARES.map((pilar) => (
+              <div
+                key={pilar.title}
+                className="p-8 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/50 card-hover flex flex-col items-start"
+              >
+                {/* Orbit visualization */}
+                <div className="mb-4 self-center">
+                  <PilarOrbitViz genes={pilar.genes} color={pilar.color} size={118} />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{pilar.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{pilar.desc}</p>
@@ -147,7 +198,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          ÍNDICE ALELO — Dark section
+          ÍNDICE ALELO — Dark section con radar de módulos
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 gradient-alelo-dark relative overflow-hidden">
         <GlowOrbs />
@@ -165,11 +216,21 @@ export default function Home() {
                 en puntajes modulares interpretables. Siete módulos temáticos, una escala de 0 a 100,
                 una lectura clínica más clara e intuitiva.
               </p>
-              <p className="text-gray-400 leading-relaxed mb-8">
+              <p className="text-gray-400 leading-relaxed mb-6">
                 El resultado no es un destino biológico. Es una herramienta de interpretación
                 clínica y preventiva que integra variantes de riesgo y variantes protectoras
                 para construir una estimación neta más precisa.
               </p>
+
+              {/* Radar visualization of the 7 modules */}
+              <div className="flex items-center gap-6 mb-8">
+                <AleleScoreViz />
+                <p className="text-xs text-gray-500 leading-relaxed max-w-[160px]">
+                  Puntajes ilustrativos de los 7 módulos del Índice Alelo.
+                  Pasa el cursor sobre cada eje para ver el módulo.
+                </p>
+              </div>
+
               <Link
                 href="/indice-alelo"
                 className="px-7 py-3.5 gradient-alelo text-white font-medium rounded-xl hover:shadow-xl hover:shadow-purple-500/25 transition-all"
@@ -196,16 +257,22 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          PROCESO CLÍNICO
+          PROCESO CLÍNICO — con flujo genómico animado
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#fafafa]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Proceso de atención</h2>
             <p className="mt-4 text-gray-500">
               Desde la consulta inicial hasta el seguimiento personalizado.
             </p>
           </div>
+
+          {/* Animated genomic flow connector */}
+          <div className="mb-8 px-2">
+            <ProcesoGenomicViz />
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {CLINICAL_STEPS.slice(0, 10).map((step) => (
               <div key={step.order} className="text-center p-4 group">
@@ -225,7 +292,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════
-          CIENCIA Y POBLACIÓN
+          CIENCIA Y POBLACIÓN — con frecuencias poblacionales
       ═══════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white relative">
         <div className="absolute inset-0 gradient-mesh" />
@@ -240,13 +307,17 @@ export default function Home() {
                 alélicas distintas a las de otras poblaciones. Extrapolar hallazgos sin contexto
                 local puede ser insuficiente o engañoso.
               </p>
-              <p className="text-gray-500 leading-relaxed mb-6">
+              <p className="text-gray-500 leading-relaxed mb-4">
                 Clínica Alelo construye herramientas con mayor pertinencia biológica y clínica
                 para México.
               </p>
-              <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
-                Ver Ciencia &rarr;
-              </Link>
+              {/* Population bubble viz — SLC16A11 */}
+              <PopulationBubbleViz variant="genomica" />
+              <div className="mt-6">
+                <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
+                  Ver Ciencia &rarr;
+                </Link>
+              </div>
             </div>
             <div className="p-8 rounded-2xl bg-white/70 backdrop-blur-sm border border-purple-100/50">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
@@ -256,13 +327,17 @@ export default function Home() {
                 No solo prestamos servicios. Generamos conocimiento: bases de datos,
                 prevalencia de variantes, validación metodológica, publicaciones científicas.
               </p>
-              <p className="text-gray-500 leading-relaxed mb-6">
+              <p className="text-gray-500 leading-relaxed mb-4">
                 Nuestro estudio piloto valida el modelo con vocación metodológica y estructura
                 científica.
               </p>
-              <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
-                Investigación y ciencia &rarr;
-              </Link>
+              {/* Population bubble viz — MTHFR C677T */}
+              <PopulationBubbleViz variant="traslacional" />
+              <div className="mt-6">
+                <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
+                  Investigación y ciencia &rarr;
+                </Link>
+              </div>
             </div>
           </div>
         </div>
