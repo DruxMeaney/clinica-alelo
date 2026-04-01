@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SiteGate from "@/components/ui/SiteGate";
+import ThemeProvider from "@/components/ui/ThemeProvider";
+import PaletteSwitcher from "@/components/ui/PaletteSwitcher";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -52,13 +54,28 @@ export default function RootLayout({
     <html
       lang="es-MX"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        {/*
+          Inline script — runs before first paint to apply saved theme.
+          Prevents flash of unstyled/wrong-theme content on page load.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('alelo-theme');if(t&&t!=='original')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-white text-gray-900">
-        <SiteGate>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SiteGate>
+        <ThemeProvider>
+          <SiteGate>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </SiteGate>
+          <PaletteSwitcher />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════
+   TEMA BASE — Alelo Original (lila profundo)
+═══════════════════════════════════════════════════════ */
 :root {
   --background: #fafafa;
   --foreground: #0f0a1a;
 
-  /* Paleta Alelo — Fucsia a Lila */
+  /* Paleta Alelo — Lila a Fucsia */
   --alelo-900: #2d0a3e;
   --alelo-800: #4a1259;
   --alelo-700: #6b1d7b;
@@ -14,14 +17,169 @@
   --alelo-300: #d9a6f0;
   --alelo-200: #ead5f7;
   --alelo-100: #f5ecfc;
-  --alelo-50: #faf5fe;
+  --alelo-50:  #faf5fe;
 
-  /* Acentos complementarios */
-  --accent-cyan: #06b6d4;
+  /* Acentos */
+  --accent-cyan:     #06b6d4;
   --accent-electric: #7c3aed;
-  --accent-rose: #e11d73;
-  --accent-gold: #f59e0b;
+  --accent-rose:     #e11d73;
+  --accent-gold:     #f59e0b;
+
+  /* Variables para gradientes dark / soft */
+  --gradient-dark-start: #0f0a1a;
+  --gradient-dark-end:   #1a0a2e;
+  --gradient-soft-mid:   #f0e6ff;
+  --gradient-soft-end:   #fdf2f8;
 }
+
+/* ═══════════════════════════════════════════════════════
+   TEMA: Fucsia Noir — fucsia eléctrico sobre negro puro
+═══════════════════════════════════════════════════════ */
+[data-theme="fucsia-noir"] {
+  --background: #fafafa;
+  --foreground: #0a0005;
+
+  --alelo-900: #050002;
+  --alelo-800: #120008;
+  --alelo-700: #b8003a;
+  --alelo-600: #f0025e;
+  --alelo-500: #ff4d88;
+  --alelo-400: #ff85ad;
+  --alelo-300: #ffb3cc;
+  --alelo-200: #ffd6e7;
+  --alelo-100: #fff0f5;
+  --alelo-50:  #fff8fb;
+
+  --accent-cyan:     #ff80ff;
+  --accent-electric: #cc00cc;
+  --accent-rose:     #ff0066;
+  --accent-gold:     #ffd700;
+
+  --gradient-dark-start: #020001;
+  --gradient-dark-end:   #0d0005;
+  --gradient-soft-mid:   #ffe0ec;
+  --gradient-soft-end:   #fff5f8;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEMA: Magenta Cristal — magenta + blancos cristalinos
+═══════════════════════════════════════════════════════ */
+[data-theme="magenta-cristal"] {
+  --background: #fdf2f8;
+  --foreground: #0d0008;
+
+  --alelo-900: #0d0008;
+  --alelo-800: #200015;
+  --alelo-700: #6b0045;
+  --alelo-600: #cc0077;
+  --alelo-500: #e91e8c;
+  --alelo-400: #f472b6;
+  --alelo-300: #f9a8d4;
+  --alelo-200: #fce7f3;
+  --alelo-100: #fdf2f8;
+  --alelo-50:  #fef9fc;
+
+  --accent-cyan:     #e879f9;
+  --accent-electric: #9900cc;
+  --accent-rose:     #ff0099;
+  --accent-gold:     #f59e0b;
+
+  --gradient-dark-start: #0d0008;
+  --gradient-dark-end:   #1a0012;
+  --gradient-soft-mid:   #fce7f3;
+  --gradient-soft-end:   #fef9fc;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEMA: Rosa Ceniza — fucsia + grafito difuminado
+═══════════════════════════════════════════════════════ */
+[data-theme="rosa-ceniza"] {
+  --background: #f5f5f5;
+  --foreground: #1a1a1a;
+
+  --alelo-900: #1a1a1a;
+  --alelo-800: #2d2d2d;
+  --alelo-700: #d11a6e;
+  --alelo-600: #e11d73;
+  --alelo-500: #f472b6;
+  --alelo-400: #f9a8d4;
+  --alelo-300: #fce7f3;
+  --alelo-200: #fef0f7;
+  --alelo-100: #fff5fa;
+  --alelo-50:  #fff8fc;
+
+  --accent-cyan:     #818cf8;
+  --accent-electric: #d946ef;
+  --accent-rose:     #be185d;
+  --accent-gold:     #f59e0b;
+
+  --gradient-dark-start: #111111;
+  --gradient-dark-end:   #1f1f1f;
+  --gradient-soft-mid:   #fce7f3;
+  --gradient-soft-end:   #f3f4f6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEMA: Neon Fucsia — cyberpunk neon sobre negro absoluto
+═══════════════════════════════════════════════════════ */
+[data-theme="neon-fucsia"] {
+  --background: #fafafa;
+  --foreground: #000000;
+
+  --alelo-900: #000000;
+  --alelo-800: #0d0008;
+  --alelo-700: #1a000f;
+  --alelo-600: #ff0080;
+  --alelo-500: #ff4da6;
+  --alelo-400: #ff80c0;
+  --alelo-300: #ffb3d9;
+  --alelo-200: #ffd9ed;
+  --alelo-100: #fff0f8;
+  --alelo-50:  #fff5fb;
+
+  --accent-cyan:     #00ffcc;
+  --accent-electric: #ff00cc;
+  --accent-rose:     #ff0066;
+  --accent-gold:     #ffd700;
+
+  --gradient-dark-start: #000000;
+  --gradient-dark-end:   #0d0008;
+  --gradient-soft-mid:   #ffe0f5;
+  --gradient-soft-end:   #fff0fb;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEMA: Pétalo Blanco — fucsia sobre blanco elegante
+═══════════════════════════════════════════════════════ */
+[data-theme="petalo-blanco"] {
+  --background: #ffffff;
+  --foreground: #1a0010;
+
+  --alelo-900: #4a0030;
+  --alelo-800: #6b0045;
+  --alelo-700: #9d0060;
+  --alelo-600: #c2185b;
+  --alelo-500: #e91e63;
+  --alelo-400: #f48fb1;
+  --alelo-300: #f8bbd9;
+  --alelo-200: #fce4ec;
+  --alelo-100: #fef1f6;
+  --alelo-50:  #fff8fb;
+
+  --accent-cyan:     #26c6da;
+  --accent-electric: #ad1457;
+  --accent-rose:     #e11d73;
+  --accent-gold:     #ffd54f;
+
+  --gradient-dark-start: #2d0020;
+  --gradient-dark-end:   #4a0030;
+  --gradient-soft-mid:   #fce4ec;
+  --gradient-soft-end:   #fef1f6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TAILWIND THEME INLINE
+═══════════════════════════════════════════════════════ */
 
 @theme inline {
   --color-background: var(--background);
@@ -70,16 +228,6 @@ body {
   100% { transform: translate(-10px, 10px) scale(0.8); opacity: 0.6; }
 }
 
-.animate-float { animation: float 6s ease-in-out infinite; }
-.animate-float-delayed { animation: float 6s ease-in-out 2s infinite; }
-.animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-.animate-helix { animation: helix-rotate 20s linear infinite; }
-.animate-dash { animation: dash-flow 2s linear infinite; }
-.animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
-.animate-particle { animation: particle-drift 8s ease-in-out infinite; }
-.animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
-.animate-shake { animation: shake 0.5s ease-in-out; }
-
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
@@ -91,27 +239,52 @@ body {
   20%, 40%, 60%, 80% { transform: translateX(4px); }
 }
 
+.animate-float          { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed  { animation: float 6s ease-in-out 2s infinite; }
+.animate-pulse-glow     { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-helix          { animation: helix-rotate 20s linear infinite; }
+.animate-dash           { animation: dash-flow 2s linear infinite; }
+.animate-fade-in-up     { animation: fade-in-up 0.6s ease-out forwards; }
+.animate-particle       { animation: particle-drift 8s ease-in-out infinite; }
+.animate-fade-in        { animation: fade-in 0.4s ease-out forwards; }
+.animate-shake          { animation: shake 0.5s ease-in-out; }
+
 /* ═══════════════════════════════════════════════════════
-   GRADIENTES ESPECIALES
+   GRADIENTES ESPECIALES — usan CSS vars para soporte de temas
 ═══════════════════════════════════════════════════════ */
 
 .gradient-alelo {
-  background: linear-gradient(135deg, var(--alelo-700) 0%, var(--alelo-500) 50%, var(--accent-electric) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--alelo-700) 0%,
+    var(--alelo-500) 50%,
+    var(--accent-electric) 100%
+  );
 }
 
 .gradient-alelo-soft {
-  background: linear-gradient(135deg, var(--alelo-50) 0%, #f0e6ff 50%, #fdf2f8 100%);
+  background: linear-gradient(
+    135deg,
+    var(--alelo-50)  0%,
+    var(--gradient-soft-mid) 50%,
+    var(--gradient-soft-end) 100%
+  );
 }
 
 .gradient-alelo-dark {
-  background: linear-gradient(135deg, #0f0a1a 0%, var(--alelo-900) 50%, #1a0a2e 100%);
+  background: linear-gradient(
+    135deg,
+    var(--gradient-dark-start) 0%,
+    var(--alelo-900) 50%,
+    var(--gradient-dark-end) 100%
+  );
 }
 
 .gradient-mesh {
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(168, 85, 199, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(225, 29, 115, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, color-mix(in srgb, var(--alelo-500) 15%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, color-mix(in srgb, var(--accent-electric) 10%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, color-mix(in srgb, var(--accent-rose) 8%, transparent) 0%, transparent 50%);
 }
 
 .gradient-glass {
@@ -126,11 +299,16 @@ body {
 
 .dna-border-left {
   border-left: 2px solid transparent;
-  border-image: linear-gradient(to bottom, var(--alelo-500), var(--accent-electric), var(--alelo-300)) 1;
+  border-image: linear-gradient(
+    to bottom,
+    var(--alelo-500),
+    var(--accent-electric),
+    var(--alelo-300)
+  ) 1;
 }
 
 .glow-dot {
-  box-shadow: 0 0 8px var(--alelo-400), 0 0 20px rgba(168, 85, 199, 0.3);
+  box-shadow: 0 0 8px var(--alelo-400), 0 0 20px color-mix(in srgb, var(--alelo-500) 30%, transparent);
 }
 
 .card-hover {
@@ -138,18 +316,20 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(168, 85, 199, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 8px 30px color-mix(in srgb, var(--alelo-500) 12%, transparent),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Líneas de red molecular */
 .molecular-grid {
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(168, 85, 199, 0.08) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--alelo-500) 8%, transparent) 1px, transparent 0);
   background-size: 40px 40px;
 }
 
 /* Scrollbar sutil */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--alelo-300); border-radius: 3px; }
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: var(--alelo-300); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--alelo-400); }
