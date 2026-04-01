@@ -328,6 +328,98 @@ body {
   background-size: 40px 40px;
 }
 
+/* ═══════════════════════════════════════════════════════
+   SISTEMA DE BRILLO FUCSIA
+═══════════════════════════════════════════════════════ */
+
+/* Cards con brillo fucsia al hover */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-rose) 30%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent-rose) 18%, transparent),
+    0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Barra decorativa con brillo (las líneas de colores en cards) */
+.glow-bar {
+  box-shadow:
+    0 0 6px  color-mix(in srgb, var(--accent-rose) 70%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent-rose) 35%, transparent);
+}
+
+/* Texto con brillo suave — headings en secciones oscuras */
+.glow-heading {
+  text-shadow:
+    0 0 30px color-mix(in srgb, var(--alelo-400) 55%, transparent),
+    0 0 60px color-mix(in srgb, var(--accent-rose) 20%, transparent);
+}
+
+/* Dot de estado con brillo fucsia más intenso */
+.glow-dot {
+  box-shadow:
+    0 0 6px  var(--alelo-400),
+    0 0 18px color-mix(in srgb, var(--accent-rose) 60%, transparent),
+    0 0 32px color-mix(in srgb, var(--accent-rose) 25%, transparent);
+}
+
+/* Botones con brillo al hover */
+.glow-btn:hover {
+  box-shadow:
+    0 0 20px color-mix(in srgb, var(--accent-rose) 45%, transparent),
+    0 0 40px color-mix(in srgb, var(--alelo-600) 30%, transparent),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Contenedor oscuro para visualizaciones interactivas */
+.viz-dark {
+  background: linear-gradient(
+    145deg,
+    #080410 0%,
+    #0f0008 40%,
+    #08040e 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--accent-rose) 22%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent-rose) 8%, transparent),
+    0 0 30px color-mix(in srgb, var(--accent-rose) 10%, transparent),
+    0 0 60px color-mix(in srgb, var(--alelo-600) 8%, transparent),
+    inset 0 0 50px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* Borde fucsia pulsante para contenedores de viz destacados */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent-rose) 18%, transparent),
+      0 0 20px color-mix(in srgb, var(--accent-rose) 10%, transparent),
+      inset 0 0 40px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent-rose) 35%, transparent),
+      0 0 35px color-mix(in srgb, var(--accent-rose) 18%, transparent),
+      0 0 60px color-mix(in srgb, var(--alelo-600) 10%, transparent),
+      inset 0 0 40px rgba(0, 0, 0, 0.45);
+  }
+}
+.viz-dark-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Cards de módulos (fondo oscuro) con hover fuchsia */
+.module-card-hover {
+  transition: all 0.25s ease;
+}
+.module-card-hover:hover {
+  background: rgba(225, 29, 115, 0.07) !important;
+  border-color: color-mix(in srgb, var(--accent-rose) 40%, transparent) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent-rose) 12%, transparent);
+}
+
 /* Scrollbar sutil */
 ::-webkit-scrollbar        { width: 6px; }
 ::-webkit-scrollbar-track  { background: transparent; }

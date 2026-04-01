@@ -87,7 +87,7 @@ export default function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/nosotros"
-                className="px-8 py-4 gradient-alelo text-white font-medium rounded-xl hover:shadow-xl hover:shadow-purple-500/25 transition-all text-base"
+                className="px-8 py-4 gradient-alelo text-white font-medium rounded-xl transition-all text-base glow-btn inline-block"
               >
                 Conoce nuestro enfoque
               </Link>
@@ -123,10 +123,10 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Interactive gene cluster visualization */}
-          <div className="mb-10 px-2">
+          {/* Interactive gene cluster visualization — dark container */}
+          <div className="mb-10 viz-dark viz-dark-pulse px-4 py-6">
             <GeneClusterViz />
-            <p className="text-center text-xs text-gray-400 mt-2">
+            <p className="text-center text-xs text-gray-500 mt-2">
               Genes del panel Alelo · Pasa el cursor sobre cada nodo para ver más información
             </p>
           </div>
@@ -150,7 +150,7 @@ export default function Home() {
               },
             ].map((item) => (
               <div key={item.title} className="p-8 rounded-2xl bg-white border border-gray-100 card-hover group">
-                <div className={`w-12 h-1 rounded-full bg-gradient-to-r ${item.accent} mb-6 group-hover:w-16 transition-all`} />
+                <div className={`w-12 h-1 rounded-full bg-gradient-to-r ${item.accent} mb-6 group-hover:w-16 transition-all glow-bar`} />
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">{item.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{item.description}</p>
               </div>
@@ -178,14 +178,36 @@ export default function Home() {
             {PILARES.map((pilar) => (
               <div
                 key={pilar.title}
-                className="p-8 rounded-2xl bg-white/80 backdrop-blur-sm border border-white/50 card-hover flex flex-col items-start"
+                className="rounded-2xl border border-white/50 card-hover flex flex-col overflow-hidden"
+                style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(8px)" }}
               >
-                {/* Orbit visualization */}
-                <div className="mb-4 self-center">
-                  <PilarOrbitViz genes={pilar.genes} color={pilar.color} size={118} />
+                {/* Dark orbit panel — fondo oscuro para la visualización */}
+                <div
+                  className="w-full flex items-center justify-center py-6 relative"
+                  style={{
+                    background: "linear-gradient(145deg, #080410 0%, #0f0008 50%, #08040e 100%)",
+                    borderBottom: `1px solid color-mix(in srgb, ${pilar.color} 30%, transparent)`,
+                    boxShadow: `inset 0 -20px 40px rgba(0,0,0,0.4), 0 0 20px color-mix(in srgb, ${pilar.color} 10%, transparent)`,
+                  }}
+                >
+                  {/* Subtle radial glow behind the orbit */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(ellipse at center, color-mix(in srgb, ${pilar.color} 12%, transparent) 0%, transparent 70%)`,
+                    }}
+                  />
+                  <PilarOrbitViz genes={pilar.genes} color={pilar.color} size={128} />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{pilar.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{pilar.desc}</p>
+                {/* Text content — light area */}
+                <div className="p-6 flex flex-col flex-1">
+                  <div
+                    className="w-8 h-0.5 rounded-full mb-4 glow-bar"
+                    style={{ background: pilar.color }}
+                  />
+                  <h3 className="text-base font-semibold text-gray-900 mb-2">{pilar.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{pilar.desc}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -210,7 +232,7 @@ export default function Home() {
                   Sistema de integración genómica
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Índice Alelo</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 glow-heading">Índice Alelo</h2>
               <p className="text-gray-300 leading-relaxed mb-4">
                 Un sistema diseñado para convertir la información de múltiples variantes genéticas
                 en puntajes modulares interpretables. Siete módulos temáticos, una escala de 0 a 100,
@@ -233,7 +255,7 @@ export default function Home() {
 
               <Link
                 href="/indice-alelo"
-                className="px-7 py-3.5 gradient-alelo text-white font-medium rounded-xl hover:shadow-xl hover:shadow-purple-500/25 transition-all"
+                className="px-7 py-3.5 gradient-alelo text-white font-medium rounded-xl transition-all glow-btn inline-block"
               >
                 Explorar el Índice Alelo
               </Link>
@@ -242,7 +264,7 @@ export default function Home() {
               {INDICE_ALELO_MODULES.map((mod) => (
                 <div
                   key={mod.id}
-                  className="p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-500/30 transition-all group"
+                  className="p-4 rounded-xl bg-white/5 border border-white/10 module-card-hover group"
                 >
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3" style={{ background: `${mod.colorAccent}25` }}>
                     <div className="w-3 h-3 rounded-full" style={{ background: mod.colorAccent }} />
@@ -268,15 +290,15 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Animated genomic flow connector */}
-          <div className="mb-8 px-2">
+          {/* Animated genomic flow connector — dark container */}
+          <div className="mb-8 viz-dark px-4 py-5">
             <ProcesoGenomicViz />
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {CLINICAL_STEPS.slice(0, 10).map((step) => (
               <div key={step.order} className="text-center p-4 group">
-                <div className="w-11 h-11 rounded-xl gradient-alelo text-white font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow-md shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-shadow">
+                <div className="w-11 h-11 rounded-xl gradient-alelo text-white font-bold text-sm flex items-center justify-center mx-auto mb-3 shadow-md shadow-purple-500/20 transition-all glow-btn">
                   {step.order}
                 </div>
                 <h4 className="text-xs font-semibold text-gray-700 mb-1">{step.title}</h4>
@@ -312,8 +334,10 @@ export default function Home() {
                 para México.
               </p>
               {/* Population bubble viz — SLC16A11 */}
-              <PopulationBubbleViz variant="genomica" />
-              <div className="mt-6">
+              <div className="viz-dark px-4 pt-4 pb-2 mt-2">
+                <PopulationBubbleViz variant="genomica" />
+              </div>
+              <div className="mt-5">
                 <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
                   Ver Ciencia &rarr;
                 </Link>
@@ -332,8 +356,10 @@ export default function Home() {
                 científica.
               </p>
               {/* Population bubble viz — MTHFR C677T */}
-              <PopulationBubbleViz variant="traslacional" />
-              <div className="mt-6">
+              <div className="viz-dark px-4 pt-4 pb-2 mt-2">
+                <PopulationBubbleViz variant="traslacional" />
+              </div>
+              <div className="mt-5">
                 <Link href="/ciencia" className="text-sm font-medium text-[#8b2fa0] hover:underline">
                   Investigación y ciencia &rarr;
                 </Link>
