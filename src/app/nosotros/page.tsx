@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import GlowOrbs from "@/components/ui/GlowOrbs";
+import ResearchClinicalBridge from "@/components/ui/ResearchClinicalBridge";
+import PGxCYPNetwork         from "@/components/ui/PGxCYPNetwork";
+import CardioRiskLandscape   from "@/components/ui/CardioRiskLandscape";
+import NutriGeneFlow         from "@/components/ui/NutriGeneFlow";
+import ExerciseCompass       from "@/components/ui/ExerciseCompass";
 
 export const metadata: Metadata = {
   title: "Qué es Clínica Alelo — Nosotros y servicios",
@@ -84,10 +89,31 @@ const SERVICES = [
   },
 ];
 
+// Viz components mapped by service name (JSX works fine in RSC)
+const SERVICE_VIZ: Record<string, React.ReactNode> = {
+  "Alelo–PGx":               <PGxCYPNetwork />,
+  "Alelo–Cardiometabólico":  <CardioRiskLandscape />,
+  "Alelo–Nutrigenómica":     <NutriGeneFlow />,
+  "Alelo–Rendimiento Físico":<ExerciseCompass />,
+};
+
+const SERVICE_VIZ_CAPTION: Record<string, string> = {
+  "Alelo–PGx":
+    "Red de interacción CYP450 — enzimas (anillo interno) y clases de fármacos (anillo externo). Pasa el cursor para ver fenotipos de metabolización.",
+  "Alelo–Cardiometabólico":
+    "Paisaje de riesgo genético-clínico. Cada nodo = variante del panel. Eje X: carga genética; Eje Y: relevancia clínica. Pasa el cursor para ver detalles.",
+  "Alelo–Nutrigenómica":
+    "Flujo nutriente → gen → fenotipo. Interactivo: pasa el cursor sobre cualquier nodo para resaltar toda la vía de interacción.",
+  "Alelo–Rendimiento Físico":
+    "Compás genómico del ejercicio. Dos perfiles: Potencia (ACTN3 RR / ACE DD) vs Resistencia (ACTN3 XX / ACE II). Alterna entre perfiles con los botones.",
+};
+
 export default function NosotrosPage() {
   return (
     <>
-      {/* Hero */}
+      {/* ══════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════ */}
       <section className="relative overflow-hidden gradient-alelo-dark py-20 md:py-24">
         <GlowOrbs />
         <div className="max-w-4xl mx-auto px-6">
@@ -103,7 +129,9 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* Descripción principal */}
+      {/* ══════════════════════════════════════════════
+          DESCRIPCIÓN PRINCIPAL
+      ══════════════════════════════════════════════ */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6 space-y-12">
           <div>
@@ -132,6 +160,21 @@ export default function NosotrosPage() {
                 Genómica &middot; Clínica &middot; Investigación &middot; Prevención
               </p>
             </div>
+          </div>
+
+          {/* ── VISUALIZACIÓN: Puente investigación → clínica ── */}
+          <div className="rounded-2xl bg-gray-950/95 border border-purple-900/30 px-6 pt-6 pb-4 shadow-xl shadow-purple-500/5">
+            <p className="text-xs font-semibold text-purple-400 tracking-widest uppercase mb-1">
+              Visualización interactiva
+            </p>
+            <h2 className="text-lg font-bold text-white mb-1">
+              La brecha que Alelo cierra
+            </h2>
+            <p className="text-xs text-gray-500 mb-4">
+              Las partículas representan flujos de información genómica desde el ecosistema científico
+              hasta la práctica clínica. Pasa el cursor sobre los nodos para ver más detalles.
+            </p>
+            <ResearchClinicalBridge />
           </div>
 
           {/* Contexto y respuesta */}
@@ -253,9 +296,9 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════
+      {/* ══════════════════════════════════════════════
           SERVICIOS
-      ══════════════════════════════════ */}
+      ══════════════════════════════════════════════ */}
       <div id="servicios" style={{ scrollMarginTop: "72px" }}>
 
         {/* Intro niveles */}
@@ -290,64 +333,76 @@ export default function NosotrosPage() {
 
         {/* Cards de servicios */}
         <section className="py-16 bg-[#fafafa]">
-          <div className="max-w-5xl mx-auto px-6 space-y-20">
+          <div className="max-w-5xl mx-auto px-6 space-y-24">
             {SERVICES.map((svc, i) => (
-              <div
-                key={svc.name}
-                className="grid md:grid-cols-5 gap-10 items-start"
-              >
-                {/* Visual + título */}
-                <div className={`md:col-span-2 space-y-4 ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                  <div className="relative rounded-2xl overflow-hidden shadow-lg shadow-purple-500/10">
-                    <Image
-                      src={svc.image}
-                      alt={svc.imageAlt}
-                      width={400}
-                      height={240}
-                      className="w-full h-44 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <div className="absolute bottom-3 left-4">
-                      <span
-                        className="text-xs font-semibold text-white px-2 py-0.5 rounded-full"
-                        style={{ backgroundColor: `${svc.color}cc` }}
-                      >
-                        {svc.tier.split("—")[0].trim()}
-                      </span>
+              <div key={svc.name}>
+                <div className="grid md:grid-cols-5 gap-10 items-start">
+                  {/* Visual + título */}
+                  <div className={`md:col-span-2 space-y-4 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                    <div className="relative rounded-2xl overflow-hidden shadow-lg shadow-purple-500/10">
+                      <Image
+                        src={svc.image}
+                        alt={svc.imageAlt}
+                        width={400}
+                        height={240}
+                        className="w-full h-44 object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      <div className="absolute bottom-3 left-4">
+                        <span
+                          className="text-xs font-semibold text-white px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: `${svc.color}cc` }}
+                        >
+                          {svc.tier.split("—")[0].trim()}
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ borderLeft: `3px solid ${svc.color}` }} className="pl-4">
+                      <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-1">
+                        {svc.label}
+                      </p>
+                      <h3 className="text-2xl font-bold text-gray-900">{svc.name}</h3>
+                      <p className="text-xs text-gray-400 mt-1">{svc.tier}</p>
                     </div>
                   </div>
-                  <div style={{ borderLeft: `3px solid ${svc.color}` }} className="pl-4">
-                    <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-1">
-                      {svc.label}
-                    </p>
-                    <h3 className="text-2xl font-bold text-gray-900">{svc.name}</h3>
-                    <p className="text-xs text-gray-400 mt-1">{svc.tier}</p>
+
+                  {/* Contenido */}
+                  <div className={`md:col-span-3 space-y-5 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+                    <p className="text-gray-600 leading-relaxed">{svc.description}</p>
+
+                    <div className="p-4 rounded-xl bg-white border border-gray-100">
+                      <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3">
+                        Perfil del paciente objetivo
+                      </h4>
+                      <ul className="space-y-1.5">
+                        {svc.targets.map((t, j) => (
+                          <li key={j} className="flex gap-2 text-sm text-gray-600">
+                            <span style={{ color: svc.color }} className="mt-0.5 flex-shrink-0">›</span>
+                            {t}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-purple-50/40 border border-purple-100/60">
+                      <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
+                        Resultado clínico
+                      </h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{svc.output}</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Contenido */}
-                <div className={`md:col-span-3 space-y-5 ${i % 2 === 1 ? "md:order-1" : ""}`}>
-                  <p className="text-gray-600 leading-relaxed">{svc.description}</p>
-
-                  <div className="p-4 rounded-xl bg-white border border-gray-100">
-                    <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3">
-                      Perfil del paciente objetivo
-                    </h4>
-                    <ul className="space-y-1.5">
-                      {svc.targets.map((t, j) => (
-                        <li key={j} className="flex gap-2 text-sm text-gray-600">
-                          <span style={{ color: svc.color }} className="mt-0.5 flex-shrink-0">›</span>
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-purple-50/40 border border-purple-100/60">
-                    <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
-                      Resultado clínico
-                    </h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">{svc.output}</p>
+                {/* ── VISUALIZACIÓN INTERACTIVA por servicio ── */}
+                <div className="mt-8 rounded-2xl bg-gray-950/95 border border-purple-900/30 px-6 pt-5 pb-4 shadow-xl shadow-purple-500/5 overflow-x-auto">
+                  <p className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: svc.color }}>
+                    Visualización interactiva — {svc.label}
+                  </p>
+                  <p className="text-xs text-gray-500 mb-5 max-w-2xl">
+                    {SERVICE_VIZ_CAPTION[svc.name]}
+                  </p>
+                  <div className="flex justify-center">
+                    {SERVICE_VIZ[svc.name]}
                   </div>
                 </div>
               </div>
